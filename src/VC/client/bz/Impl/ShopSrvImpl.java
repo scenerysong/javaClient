@@ -8,28 +8,80 @@ import VC.common.Goods;
 import VC.common.GoodsMessage;
 import VC.common.MessageType;
 
-public class ShopSrvImpl extends ClientSrvImpl{
+public class ShopSrvImpl extends ClientSrvImpl {
 
 	public ShopSrvImpl() {
 		super();
 	}
-	
-	public List<Goods> getAllGoods() throws ClassNotFoundException, IOException{
-		
+	public ShopSrvImpl(String username) {
+		super(username);
+	}
+
+	public List<Goods> getAllGoods() throws ClassNotFoundException, IOException {
+
 		List<Goods> retGoodslist = new ArrayList<Goods>();
 		String type = MessageType.CMD_GET_ALL_GOODS;
 		GoodsMessage sendmsg = new GoodsMessage();
-		sendmsg.setSender("wls");
 		sendmsg.setType(type);
+		sendmsg.setID(getUser());
+		
+		this.SendMessage(sendmsg);
+
+		GoodsMessage rcvmsg = new GoodsMessage();
+		rcvmsg = (GoodsMessage) this.ReceiveMessage();
+		retGoodslist = rcvmsg.getGoodslist();
+
+		return retGoodslist;
+	}
+
+	public List<Goods> getAllMyGoods() throws ClassNotFoundException, IOException {
+
+		List<Goods> myGoodslist = new ArrayList<Goods>();
+		String type = MessageType.CMD_GET_ALL_MYGOODS;
+		GoodsMessage sendmsg = new GoodsMessage();
+		sendmsg.setType(type);
+		sendmsg.setID(getUser());
+
+		this.SendMessage(sendmsg);
+
+		GoodsMessage rcvmsg = new GoodsMessage();
+		rcvmsg = (GoodsMessage) this.ReceiveMessage();
+		myGoodslist = rcvmsg.getGoodslist();
+
+		return myGoodslist;
+	}
+	
+	public boolean buyAllGoods(String goodsname,String username)throws ClassNotFoundException, IOException{
+		boolean res = false;
+		String type = MessageType.CMD_BUY_ALL_GOODS;
+		GoodsMessage sendmsg = new GoodsMessage();
+		sendmsg.setSender(username);
+		sendmsg.setType(type);
+		sendmsg.setProductName(goodsname);
+		sendmsg.setID(getUser());
 		
 		this.SendMessage(sendmsg);
 		
 		GoodsMessage rcvmsg = new GoodsMessage();
 		rcvmsg = (GoodsMessage) this.ReceiveMessage();
-		retGoodslist = rcvmsg.getGoodslist();
-		
-		return retGoodslist;
+		res = rcvmsg.isRes();
+		return res;
 	}
-	
-	
+	public boolean addAllGoods(String mygoodsname,String num,String username)throws ClassNotFoundException, IOException{
+		boolean res = false;
+		String type = MessageType.CMD_ADD_ALL_GOODS;
+		GoodsMessage sendmsg = new GoodsMessage();
+		sendmsg.setSender(username);
+		sendmsg.setType(type);
+		sendmsg.setProductName(mygoodsname);
+		sendmsg.setGoodsNum(num);
+		sendmsg.setID(getUser());
+		
+		this.SendMessage(sendmsg);
+		
+		GoodsMessage rcvmsg = new GoodsMessage();
+		rcvmsg = (GoodsMessage) this.ReceiveMessage();
+		res = rcvmsg.isRes();
+		return res;
+	}
 }

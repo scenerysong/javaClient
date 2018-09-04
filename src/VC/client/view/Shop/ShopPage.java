@@ -19,19 +19,16 @@ import javax.swing.*;
 import VC.client.bz.Impl.ShopSrvImpl;
 import VC.common.Goods;
 
-public class ShopPage extends JFrame{
+public class ShopPage extends JFrame{	
+	public ShopSrvImpl shopsrv = new ShopSrvImpl("mike");
 	
-	
-	public ShopSrvImpl shopsrv = new ShopSrvImpl();
-	
-	JButton jb1 = new JButton("加入购物车");
-	JButton jb2 = new JButton("我的购物车");
+	JButton jb1 = new JButton("���빺�ﳵ");
+	JButton jb2 = new JButton("�ҵĹ��ﳵ");
+	JButton jb3 = new JButton("����");
 	
 	ArrayList<JTextField> jtfs = new ArrayList<>();
 	
 	public ShopPage() throws ClassNotFoundException, IOException {
-		
-		
 		List<String> GoodsName = new ArrayList<String>();
 		List<String> GoodsID = new ArrayList<String>();
 		List<String> GoodsPrice = new ArrayList<String>();
@@ -45,38 +42,52 @@ public class ShopPage extends JFrame{
 			//NUM.add(i, goodslist.get(i).getGoodsNum());
 		}
 		
-		JPanel p1 = new JPanel(new GridLayout(GoodsName.size()+1,1));
-		JPanel p2 = new JPanel(new GridLayout(GoodsName.size()+1,1));
-		JPanel p3 = new JPanel(new GridLayout(GoodsName.size()+1,1));
-		JPanel p4 = new JPanel(new GridLayout(GoodsName.size()+1,1));
+		JPanel p1 = new JPanel(new GridLayout(GoodsName.size()+2,1));
+		JPanel p2 = new JPanel(new GridLayout(GoodsName.size()+2,1));
+		JPanel p3 = new JPanel(new GridLayout(GoodsName.size()+2,1));
+		JPanel p4 = new JPanel(new GridLayout(GoodsName.size()+2,1));
 		
 		Container container = this.getContentPane();
 		container.setLayout(new GridLayout(1,4,20,100));
 		
-		for(int i=0;i<GoodsID.size()+1;i++) {
-			if(i!=GoodsID.size()) {
-				p1.add(new JLabel(GoodsID.get(i)));
+		for(int i=0;i<GoodsID.size()+2;i++) {
+			if(i==0){
+				p1.add(new JLabel("商品编号"));
+			}
+			else if(i==GoodsID.size()+1) {
+				p1.add(jb1);
 			}
 			else {
-				p1.add(jb1);
+				p1.add(new JLabel(GoodsID.get(i-1)));
 			}
 			
 		}
-		for(int i=0;i<GoodsName.size();i++) {
-			p2.add(new JLabel(GoodsName.get(i)));
-		}
-		for(int i=0;i<GoodsPrice.size()+1;i++) {
-			if(i!=GoodsPrice.size()) {
-				p3.add(new JLabel(GoodsPrice.get(i)));
+		for(int i=0;i<GoodsName.size()+2;i++) {
+			if(i==0){
+				p2.add(new JLabel("商品名称"));
+			}
+			else if(i==GoodsName.size()+1) {
+				p2.add(jb2);
 			}
 			else {
-				p3.add(jb2);
+				p2.add(new JLabel(GoodsName.get(i-1)));
+			}
+		}
+		for(int i=0;i<GoodsPrice.size()+2;i++) {
+			if(i==0){
+				p3.add(new JLabel("商品价格"));
+			}
+			else if(i==GoodsPrice.size()+1) {
+				p3.add(jb3);
+			}
+			else {
+				p3.add(new JLabel(GoodsPrice.get(i-1)));
 			}
 		}
 		
 		//ArrayList<JTextField> jtfs = new ArrayList<>();
 		
-		for(int i=0;i<GoodsID.size();i++) {
+		for(int i=0;i<GoodsID.size()+1;i++) {
 			if(i==0) {
 				p4.add(new JLabel("商品数量"));
 			}
@@ -87,16 +98,31 @@ public class ShopPage extends JFrame{
 			}
 		}
 		
+		
 		int a=jtfs.size();
 		String[] NUM = new String[a];
 		for(int i=0;i<a;i++) {
 			NUM[i]=jtfs.get(i).getText();
 		}
 		
-		
 		jb1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	JOptionPane.showMessageDialog(null, "添加成功");
+            	try {
+            		for(int i=0;i<a;i++) {
+            			if(Integer.valueOf(NUM[i])!=0) {
+            				shopsrv = new ShopSrvImpl("mike");
+            				shopsrv.addAllGoods(GoodsName.get(i),NUM[i],"mike");
+            			}
+            			
+            		}
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+            	JOptionPane.showMessageDialog(null, "��ӳɹ�");
             	
             }
         });
@@ -118,6 +144,15 @@ public class ShopPage extends JFrame{
             	//}
             }
          });
+		jb3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	//for (int i = 0; i < jtfs.size(); i++) {
+                    //String temp = jtfs.get(i).getText();
+            	new shopFrame();
+            	setVisible(false);
+            	//}
+            }
+         });
 		
 		
 		container.add(p1);
@@ -127,7 +162,7 @@ public class ShopPage extends JFrame{
 		
 		this.setVisible(true);
 		this.setSize(500, 350);
-		this.setTitle("虚拟校园商店");
+		this.setTitle("����У԰�̵�");
 		this.setLocation(200, 200);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}

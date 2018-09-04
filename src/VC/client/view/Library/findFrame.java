@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -38,7 +40,8 @@ public class findFrame extends JFrame {
 	JPanel jp2 = new JPanel();
 	JPanel jp3 = new JPanel();
 	JFrame jf = new JFrame();
-	public LibrarySrvImpl booksrv = new LibrarySrvImpl("mike");
+	public LibrarySrvImpl booksrv;
+	List<Book> booklist = new ArrayList<Book>();
 	public findFrame() {
 		
 		jf.setTitle("虚拟校图书馆查询界面");
@@ -67,7 +70,7 @@ public class findFrame extends JFrame {
 		tb.setRowHeight(30);
 		JTableHeader header = tb.getTableHeader(); // 锟斤拷取 JTable 锟斤拷头锟侥讹拷锟斤拷
 		header.setFont(new Font("微软雅黑",  Font.PLAIN, 16));
-		header.setPreferredSize(new Dimension(header.getWidth(), 35)); // 锟斤拷锟矫达拷锟斤拷锟斤拷锟斤拷锟窖★拷锟叫�
+		header.setPreferredSize(new Dimension(header.getWidth(), 35)); // 锟斤拷锟矫达拷锟斤拷锟斤拷锟斤拷锟窖★拷锟叫 
 		scrollPane.setViewportView(tb);
 		model = (DefaultTableModel) tb.getModel();
 		model.setColumnIdentifiers(new Object[] {  "编号", "书名", "馆藏", "数量" });
@@ -76,32 +79,17 @@ public class findFrame extends JFrame {
 		bt.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/*
 				try {
-					Connection con = new DB().getConn();
-					Statement stmt = con.createStatement();
-					String sql = "select * from lesson where id =" + jt.getText().trim();
-					ResultSet rs = stmt.executeQuery(sql);
-					boolean flag = true;
-					if (rs.next()) {
-						flag = false;
-						int id = rs.getInt(1);
-						String name = rs.getString(2);
-						String palce = rs.getString(3);
-						int num = rs.getInt(4);
-						model.setRowCount(0);
-						model.addRow(new Object[] { id, name, place, num });
+					booksrv = new LibrarySrvImpl();
+					booklist=booksrv.searchName(jt.getText());
+					for(int i=0;i<booklist.size();i++) {
+						String name =booklist.get(i).getBookName();
+						String id = booklist.get(i).getBookID();
+						String publisher = booklist.get(i).getBookPublisher();
+						String num = booklist.get(i).getBookNum();
+						model.addRow(new Object[] { id, name, publisher, num });
 						tb.setModel(model);
 					}
-					if (flag == true) {
-						JOptionPane.showMessageDialog(null, "锟矫憋拷锟介不锟斤拷锟斤拷!");
-					}
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-			*/
-				try {
-					booksrv.searchName(jt.getText());
 				} catch (ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

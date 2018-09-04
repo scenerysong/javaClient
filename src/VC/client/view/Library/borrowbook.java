@@ -89,13 +89,13 @@ public class borrowbook extends JFrame implements ActionListener {
                 {"Policy","768","Markus",false},
                 {"Furture","111","Song",false},};
 		
-		String[] n = { "涔﹀悕", "鍑虹増鍟�, "浣滆�", "鏄惁鍔犲叆涔﹀崟" };
+		String[] n = { "娑旓箑鎮�", "閸戣櫣澧楅崯锟�, "娴ｆ粏锟�", "閺勵垰鎯侀崝鐘插弳娑旓箑宕�" };
 		*/
 
 		//defaultModel = new DefaultTableModel(p, n);
         JScrollPane s = new JScrollPane(table);
         f.getContentPane().add(s, BorderLayout.CENTER);
-		// 锟斤拷锟斤拷一锟斤拷默锟较的憋拷锟侥ｏ拷锟�
+		// 閿熸枻鎷烽敓鏂ゆ嫹涓�閿熸枻鎷烽粯閿熻緝鐨勬唻鎷烽敓渚ワ綇鎷烽敓锟�
 
 		//defaultModel = new DefaultTableModel(p, n);
 		//table = new JTable(defaultModel);
@@ -119,13 +119,13 @@ public class borrowbook extends JFrame implements ActionListener {
 		});
 
 		// JPanel panel = new JPanel();
-		JButton b = new JButton("加入书单");
+		JButton b = new JButton("鍔犲叆涔﹀崟");
 		panel.add(b);
 		b.addActionListener(this);
-		b = new JButton("我的书单");
+		b = new JButton("鎴戠殑涔﹀崟");
 		panel.add(b);
 		b.addActionListener(this);
-		b = new JButton("返回");
+		b = new JButton("杩斿洖");
 		panel.add(b);
 		b.addActionListener(this);
 
@@ -136,7 +136,7 @@ public class borrowbook extends JFrame implements ActionListener {
 		f.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		f.setLocation(200, 200);
 		f.setResizable(false);
-        f.setTitle("虚拟校园图书馆系统借书界面");
+        f.setTitle("铏氭嫙鏍″洯鍥句功棣嗙郴缁熷�熶功鐣岄潰");
         f.pack();
         f.setVisible(true);
 		f.addWindowListener(new WindowAdapter() {
@@ -151,11 +151,11 @@ public class borrowbook extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("加入书单")) {
+		if (e.getActionCommand().equals("鍔犲叆涔﹀崟")) {
 			for (int i = 0; i < v1.size(); i++) {
 				int a = v1.indexOf(i);
 				System.out.println(bookName.get(a));
-				// 锟皆猴拷锟斤拷锟斤拷锟斤拷菘锟�
+				// 閿熺殕鐚存嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷疯彉閿燂拷
 			
 			}
 			for (int i = 0; i < v1.size(); i++) {
@@ -177,12 +177,12 @@ public class borrowbook extends JFrame implements ActionListener {
 			}
 
 		}
-		if (e.getActionCommand().equals("返回")) {
+		if (e.getActionCommand().equals("杩斿洖")) {
 			new mainFrame();
 			f.setVisible(false);
 			//setVisible(false);
 		}
-		if (e.getActionCommand().equals("我的书单")) {
+		if (e.getActionCommand().equals("鎴戠殑涔﹀崟")) {
 			new mybook();
 			f.setVisible(false);
 		}
@@ -206,7 +206,7 @@ class MyTable18 extends AbstractTableModel {
             {"Policy","768","Markus",false},
             {"Furture","111","Song",false},};
 */
-	public String[] n = { "书名", "出版商 ","作者", "是否加入" };
+	public String[] n = { "涔﹀悕", "鍑虹増鍟� ","浣滆��", "鏄惁鍔犲叆" };
 
 	public MyTable18() {
 		super();
@@ -261,7 +261,7 @@ class MyTable18 extends AbstractTableModel {
 
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		//p[rowIndex][columnIndex] = aValue;
+		p[rowIndex][columnIndex] = aValue;
 		fireTableCellUpdated(rowIndex, columnIndex);
 	}
 }

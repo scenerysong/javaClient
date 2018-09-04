@@ -35,13 +35,25 @@ public class returnbooks extends JFrame implements ActionListener {
 	JPanel panel = new JPanel();
 	Vector v1 = new Vector();
 	JFrame f = new JFrame();
-	public LibrarySrvImpl booksrv;
+	public LibrarySrvImpl booksrv = new LibrarySrvImpl("mike");
 	List<String> bookName = new ArrayList<String>();
 
 	public returnbooks() {
 		List<Book> mybooklist = new ArrayList<Book>();
+		/*
 		try {
 			booksrv = new LibrarySrvImpl("mike");
+			mybooklist = booksrv.getallMyBook();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		*/
+		
+		try {
 			mybooklist = booksrv.getallMyBook();
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -53,11 +65,13 @@ public class returnbooks extends JFrame implements ActionListener {
 		
 		for (int i = 0; i < mybooklist.size(); i++) {
 			bookName.add(mybooklist.get(i).getBookName());
+			System.out.println("this is step " + mybooklist.get(i).getBookName());
 		}
 		
 		//JFrame f = new JFrame();
-		MyTable1 mt1 = new MyTable1();
+		MyTable1 mt1 = new MyTable1(booksrv);
 		
+		System.out.println("this is step of my table");
 		final JTable table1 = new JTable(mt1);
 		/*
 		String[] n = {"书名", "出版商", "作者", "是否还书" };
@@ -134,7 +148,8 @@ public class returnbooks extends JFrame implements ActionListener {
 				// to do: the add course part
 				// v1.size()
 				try {
-					booksrv = new LibrarySrvImpl("mike");
+					//booksrv = new LibrarySrvImpl("mike");
+					System.out.println("this is step returnbook");
 					booksrv.returnBook(bookName.get(a), "mike");
 				} catch (ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
@@ -166,12 +181,12 @@ public class returnbooks extends JFrame implements ActionListener {
 }
 
 class MyTable1 extends AbstractTableModel {
-	public LibrarySrvImpl booksrv = new LibrarySrvImpl("mike");
+	//public LibrarySrvImpl booksrv = new LibrarySrvImpl("mike");
 	public Object[][] p = null;
 	
 	public String[] n = { "书名", "出版商 ","作者", "是否还书" };
 	
-	public MyTable1() {
+	public MyTable1(LibrarySrvImpl booksrv) {
 		super();
 		List<Book> booklist = new ArrayList<Book>();
 		try {
