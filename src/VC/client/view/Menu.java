@@ -1,5 +1,6 @@
 package VC.client.view;
 
+import VC.client.view.Library.mainFrame;
 import javafx.application.Application;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -114,18 +115,19 @@ public class Menu extends Application{
 	}
 	
 	private void XuejiAction() {
-		
+		System.out.println("this is xue ji part");
 	}
 	
 	private void XuankeAction() {
-		
+		System.out.println("this is xuan ke part");
 	}
 	
 	private void TushuguanAction() {
-		
+		System.out.println("this is library part");
+		new mainFrame();
 	}
 	
 	private void ShangdianAction() {
-		
+		System.out.println("this is shop part");
 	}
 }

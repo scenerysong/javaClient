@@ -14,8 +14,7 @@ public class LibrarySrvImpl extends ClientSrvImpl {
 		super();
 	}
 	public LibrarySrvImpl(String name) {
-		super();
-		this.setUser(name);
+		super(name);
 	}
 
 	public List<Book> searchName(String bookname) throws IOException, ClassNotFoundException {
@@ -90,7 +89,7 @@ public class LibrarySrvImpl extends ClientSrvImpl {
 		String type = MessageType.CMD_GET_ALL_MYBOOK;
 		BookMessage sendmsg = new BookMessage();
 		sendmsg.setType(type);
-		sendmsg.setID(this.getUser());
+		sendmsg.setID(this.getUseraccount());
 
 		this.SendMessage(sendmsg);
 

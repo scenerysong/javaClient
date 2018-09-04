@@ -15,11 +15,11 @@ public class ClientSrvImpl {
 	private static final int SERVER_PORT = SocketConstant.SERVER_PORT;
 	
 	private Socket socket = null;
-	private String User = null;
+	private String Useraccount = null;
 	
 	public ClientSrvImpl(String user) {
 		
-		this.setUser(user);
+		this.setUseraccount(user);
 		
 		try {
 			this.setSocket(new Socket(SERVER_ADDRESS, SERVER_PORT));
@@ -68,12 +68,13 @@ public class ClientSrvImpl {
 		this.socket = socket;
 	}
 
-	public String getUser() {
-		return User;
+
+	public String getUseraccount() {
+		return Useraccount;
 	}
 
-	public void setUser(String user) {
-		User = user;
+	public void setUseraccount(String useraccount) {
+		Useraccount = useraccount;
 	}
 	
 }

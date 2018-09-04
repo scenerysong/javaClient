@@ -74,7 +74,7 @@ public class CourseSrvImpl extends ClientSrvImpl{
 		String type = MessageType.CMD_GET_ALL_MYCOURSE;
 		CourseMessage sendmsg = new CourseMessage();
 		sendmsg.setType(type);
-		sendmsg.setID(this.getUser());
+		sendmsg.setID(this.getUseraccount());
 		
 		this.SendMessage(sendmsg);
 		

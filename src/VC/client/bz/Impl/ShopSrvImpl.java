@@ -23,7 +23,7 @@ public class ShopSrvImpl extends ClientSrvImpl {
 		String type = MessageType.CMD_GET_ALL_GOODS;
 		GoodsMessage sendmsg = new GoodsMessage();
 		sendmsg.setType(type);
-		sendmsg.setID(getUser());
+		sendmsg.setID(getUseraccount());
 		
 		this.SendMessage(sendmsg);
 
@@ -40,7 +40,7 @@ public class ShopSrvImpl extends ClientSrvImpl {
 		String type = MessageType.CMD_GET_ALL_MYGOODS;
 		GoodsMessage sendmsg = new GoodsMessage();
 		sendmsg.setType(type);
-		sendmsg.setID(getUser());
+		sendmsg.setID(getUseraccount());
 
 		this.SendMessage(sendmsg);
 
@@ -58,7 +58,7 @@ public class ShopSrvImpl extends ClientSrvImpl {
 		sendmsg.setSender(username);
 		sendmsg.setType(type);
 		sendmsg.setProductName(goodsname);
-		sendmsg.setID(getUser());
+		sendmsg.setID(getUseraccount());
 		
 		this.SendMessage(sendmsg);
 		
@@ -75,7 +75,7 @@ public class ShopSrvImpl extends ClientSrvImpl {
 		sendmsg.setType(type);
 		sendmsg.setProductName(mygoodsname);
 		sendmsg.setGoodsNum(num);
-		sendmsg.setID(getUser());
+		sendmsg.setID(getUseraccount());
 		
 		this.SendMessage(sendmsg);
 		
