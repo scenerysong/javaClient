@@ -37,21 +37,21 @@ public class mainFrame extends JFrame{
 	private String usrname;
 	private Socket passocket;
 	
-	JButton button1 = new JButton("��ѯ");
-	JButton button2 = new JButton("����");
-	JButton button3 = new JButton("����");
-	JButton button4 = new JButton("�ҵ��鵥");
+	JButton button1 = new JButton("查询");
+	JButton button2 = new JButton("借书");
+	JButton button3 = new JButton("还书");
+	JButton button4 = new JButton("我的书单");
 	JFrame jf = new JFrame();
 	public mainFrame(String pusrname, Socket psocket) {
 		
 		// this.setUsrname(pusrname);
 		// this.setPassocket(psocket);
 		
-		jf.setTitle("����Уͼ���");
+		jf.setTitle("虚拟图书馆");
 		jf.setSize(new Dimension(550, 200));
 		jf.setLocation(200, 200);
 		jf.setVisible(true);
-		jf.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		jf.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		jf.setLayout(null);
 		
 		jf.getContentPane().add(button1, null);
@@ -67,27 +67,31 @@ public class mainFrame extends JFrame{
 		button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	new findFrame(pusrname, psocket);
-            	jf.setVisible(false);
+            	jf.dispose();
+            	// jf.setVisible(false);
             }
          });
 		
 		button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	new borrowbook(pusrname, psocket);
-            	jf.setVisible(false);
+            	jf.dispose();
+            	// jf.setVisible(false);
             }
          });
 		
 		button3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	new returnbooks(pusrname, psocket);
-            	jf.setVisible(false);
+            	jf.dispose();
+            	// jf.setVisible(false);
             }
          });
 		button4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	new mybook(pusrname, psocket);
-            	jf.setVisible(false);
+            	jf.dispose();
+            	// jf.setVisible(false);
             }
          });
 		

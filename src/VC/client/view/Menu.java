@@ -1,8 +1,10 @@
 package VC.client.view;
 
 import java.net.Socket;
-
+import VC.client.view.Stu.Students;
+import VC.client.view.course.courseFrame;
 import VC.client.view.Library.mainFrame;
+import VC.client.view.Shop.Store;
 import javafx.application.Application;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -128,10 +130,12 @@ public class Menu extends Application{
 	
 	private void XuejiAction() {
 		System.out.println("this is xue ji part");
+		new Students(this.getUsrname(), this.getPassocket()).start(new Stage());
 	}
 	
 	private void XuankeAction() {
 		System.out.println("this is xuan ke part");
+		new courseFrame(this.getUsrname(),this.getPassocket());
 	}
 	
 	private void TushuguanAction() {
@@ -141,6 +145,7 @@ public class Menu extends Application{
 	
 	private void ShangdianAction() {
 		System.out.println("this is shop part");
+		new Store(this.getUsrname(), this.getPassocket()).start(new Stage());
 	}
 
 	public String getUsrname() {

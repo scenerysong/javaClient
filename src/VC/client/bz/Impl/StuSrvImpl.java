@@ -1,6 +1,7 @@
 package VC.client.bz.Impl;
 
 import java.io.IOException;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,9 @@ public class StuSrvImpl extends ClientSrvImpl{
 	public StuSrvImpl(String username) {
 		super(username);
 	}
+	public StuSrvImpl(String username, Socket socket) {
+		super(username, socket);
+	}
 	
 	public User getMyInfo() throws IOException, ClassNotFoundException {
 		
@@ -24,6 +28,7 @@ public class StuSrvImpl extends ClientSrvImpl{
 		UserMessage sendmsg = new UserMessage();
 		sendmsg.setType(type);
 		sendmsg.setID(getUseraccount());
+		sendmsg.setUsername(getUseraccount());
 
 		this.SendMessage(sendmsg);
 
@@ -57,8 +62,10 @@ public User getPersonInfo(String usr) throws IOException, ClassNotFoundException
 		String type = MessageType.CMD_GET_MY_USER;
 		UserMessage sendmsg = new UserMessage();
 		sendmsg.setType(type);
-		sendmsg.setID(usr);
-
+		sendmsg.setID(getUseraccount());
+		sendmsg.setUsername(usr);
+		
+		
 		this.SendMessage(sendmsg);
 
 		UserMessage rcvmsg = new UserMessage();

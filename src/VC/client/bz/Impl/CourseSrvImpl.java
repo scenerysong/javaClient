@@ -1,6 +1,7 @@
 package VC.client.bz.Impl;
 
 import java.io.IOException;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,9 @@ public class CourseSrvImpl extends ClientSrvImpl{
 	
 	public CourseSrvImpl(String user) {
 		super(user);
+	}
+	public CourseSrvImpl(String user, Socket socket) {
+		super(user, socket);
 	}
 	
 	public List<Course> getAllCourse() throws IOException, ClassNotFoundException{

@@ -57,7 +57,7 @@ public class mybook extends JFrame implements ActionListener{
 	JFrame f = new JFrame();
 	public LibrarySrvImpl booksrv;
 	public Object[][] p = null;
-	public String[] n = { "����", "������ ","����" };
+	public String[] n = { "书名", "出版商","作者" };
 	
 	public mybook(String pusrname, Socket psocket) {
 		
@@ -87,7 +87,7 @@ public class mybook extends JFrame implements ActionListener{
 		JScrollPane s = new JScrollPane(table);
         f.getContentPane().add(s, BorderLayout.CENTER);
         
-        JButton b = new JButton("����");
+        JButton b = new JButton("返回");
 		panel.add(b);
 		b.addActionListener(this);
 
@@ -98,7 +98,7 @@ public class mybook extends JFrame implements ActionListener{
 		f.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		f.setLocation(200, 200);
 		f.setResizable(false);
-        f.setTitle("����У԰ͼ���ϵͳ�ҵ��鵥");
+        f.setTitle("虚拟图书馆");
         f.pack();
         f.setVisible(true);
 		f.addWindowListener(new WindowAdapter() {
@@ -113,7 +113,7 @@ public class mybook extends JFrame implements ActionListener{
 
 	
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("����")) {
+		if (e.getActionCommand().equals("返回")) {
 			new mainFrame(booksrv.getUseraccount(), booksrv.getSocket());
 			f.setVisible(false);
 

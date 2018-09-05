@@ -1,6 +1,7 @@
 package VC.client.view.Shop;
 
 import java.io.IOException;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,20 @@ public class Store extends Application{
 	private FlowPane pane = new FlowPane();	
 	private DoubleProperty balance = new SimpleDoubleProperty();
 	
+	private String usrname;
+	private Socket socket;
+	public Store() {
+		super();
+	}
+	public Store(String pusrname, Socket psocket) {
+		super();
+		this.setUsrname(pusrname);
+		this.setSocket(psocket);
+	}
+	
 	public void start(Stage Store) {
+		
+		shopsrv = new ShopSrvImpl(this.getUsrname(),this.getSocket());
 		pane.setPadding(new Insets(50,50,50,50));
 		pane.setHgap(15);
 		pane.setVgap(10);
@@ -85,7 +99,7 @@ public class Store extends Application{
 		List<String> goodsPrice = new ArrayList<String>();
 		List<String> goodsNum = new ArrayList<String>();
 		
-		shopsrv = new ShopSrvImpl("mike");
+		shopsrv = new ShopSrvImpl(this.getUsrname(),this.getSocket());
 		List<Goods> goodslist = shopsrv.getAllGoods();
 		
 		for(int i=0;i<goodslist.size();i++) {
@@ -133,8 +147,8 @@ public class Store extends Application{
 				}
 				try {
             		for(int i=0;i<b;i++) {
-            			if(Integer.valueOf(NUM[i])!=0) {
-            				shopsrv = new ShopSrvImpl("mike");
+            			if(Integer.parseInt(NUM[i])!=0) {
+            				shopsrv = new ShopSrvImpl(getUsrname(), getSocket());
             				shopsrv.addAllGoods(goodsName.get(i),NUM[i],"mike");
             			}
             			
@@ -166,7 +180,7 @@ public class Store extends Application{
 		List<String> GoodsPrice = new ArrayList<String>();
 		List<String> NUM = new ArrayList<String>();
 		
-		shopsrv = new ShopSrvImpl("mike");
+		shopsrv = new ShopSrvImpl(getUsrname(), getSocket());
 		List<Goods> goodslist = shopsrv.getAllMyGoods();
 		for(int i=0;i<goodslist.size();i++) {
 			GoodsName.add(i, goodslist.get(i).getProductName());
@@ -203,7 +217,7 @@ public class Store extends Application{
 				// TODO Auto-generated method stub
 				try {
             		for(int i=0;i<goodslist.size();i++) {
-            			shopsrv = new ShopSrvImpl("mike");
+            			shopsrv = new ShopSrvImpl(getUsrname(), getSocket());
             			shopsrv.buyAllGoods(GoodsName.get(i), "wls");
             		}
             		
@@ -231,5 +245,21 @@ public class Store extends Application{
 	
 	public static void main(String[] args) {
 		Application.launch(args);
+	}
+
+	public String getUsrname() {
+		return usrname;
+	}
+
+	public void setUsrname(String usrname) {
+		this.usrname = usrname;
+	}
+
+	public Socket getSocket() {
+		return socket;
+	}
+
+	public void setSocket(Socket socket) {
+		this.socket = socket;
 	}
 }

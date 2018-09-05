@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.net.Socket;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
@@ -54,49 +55,37 @@ public class chooseCourse extends JFrame implements ActionListener {
 	List<String> courseName = new ArrayList<String>();
 	// String[] courseName = { "History", "Science", "Policy" };
 
-	public CourseSrvImpl coursesrv = new CourseSrvImpl("mike");
+	public CourseSrvImpl coursesrv;
 
-	public chooseCourse() {
+	public chooseCourse(String pusrname, Socket psocket) {
 
-		/*
-		 * Object[][] p = { {"001", "History", "Mike","2",false }, {"002", "Science",
-		 * "Dan","3", false }, {"003","Policy","Markus","2",false},};
-		 */
+		coursesrv = new CourseSrvImpl(pusrname, psocket);
+		
 		String[] n = { "课程编号", "课程名字", "授课老师", "学分", "是否选择" };
 
 		List<Course> courselist = new ArrayList<Course>();
-		//System.out.println("step1");
 		try {
 			courselist = coursesrv.getAllCourse();
-			//System.out.println("STEP2");
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-			System.out.println("fail1");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-			System.out.println("fail2");
 		}
-		//System.out.println("STEP3");
+		
 		for (int i = 0; i < courselist.size(); i++) {
 			courseName.add(courselist.get(i).getCourseName());
 			System.out.println(courseName.get(i));
 		}
-		//System.out.println("STEP4");
-		// JFrame f = new JFrame();
-		MyTable18 mt = new MyTable18();
+
+		MyTable18 mt = new MyTable18(coursesrv);
 		final JTable table = new JTable(mt);
 		JCheckBox jc1 = new JCheckBox();
 		table.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(jc1));
 		table.setPreferredScrollableViewportSize(new Dimension(400, 150));
-		// defaultModel = new DefaultTableModel(p, n);
 		JScrollPane s = new JScrollPane(table);
 		f.getContentPane().add(s, BorderLayout.CENTER);
-
-		// defaultModel = new DefaultTableModel(p, n);
-		// table = new JTable(defaultModel);
-		// table.setPreferredScrollableViewportSize(new Dimension(400, 80));
 
 		table.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -106,9 +95,7 @@ public class chooseCourse extends JFrame implements ActionListener {
 				Object obj = table.getValueAt(row, column);
 				Object obj1 = true;
 				if (table.isCellSelected(row, column)) {
-					System.out.println(obj);
 					if (obj.equals(obj1)) {
-						System.out.println(row);
 						v1.add(row);
 					}
 				}
@@ -152,9 +139,6 @@ public class chooseCourse extends JFrame implements ActionListener {
 			for (int i = 0; i < v1.size(); i++) {
 				int a = (int) v1.get(i);
 				System.out.println(a);
-				//System.out.println(courseName.get(a));
-				// to do: the add course part
-				// v1.size()
 				try {
 					coursesrv = new CourseSrvImpl("mike");
 					System.out.println(courseName.get(a));
@@ -171,32 +155,34 @@ public class chooseCourse extends JFrame implements ActionListener {
 
 		}
 		if (e.getActionCommand().equals("返回")) {
-			new courseFrame();
+			new courseFrame(coursesrv.getUseraccount(), coursesrv.getSocket());
 			f.setVisible(false);
 			// setVisible(false);
 		}
 		if (e.getActionCommand().equals("我的课程")) {
-			new mycourse();
+			new mycourse(coursesrv.getUseraccount(),coursesrv.getSocket());
 			f.setVisible(false);
 		}
-		// table.revalidate();
 	}
 
+	/*
 	public static void main(String[] args) {
 		new chooseCourse();
 	}
+	*/
 
 }
 
 class MyTable18 extends AbstractTableModel {
 
-	public CourseSrvImpl coursesrv = new CourseSrvImpl("mike");
+	public CourseSrvImpl coursesrv;
 	public Object[][] p = null;
 
 	public String[] n = { "课程编号", "课程名字", "授课老师", "学分", "是否选择" };
 
-	public MyTable18() {
+	public MyTable18(CourseSrvImpl coursesrv0) {
 		super();
+		coursesrv = coursesrv0;
 		List<Course> courselist = new ArrayList<Course>();
 		try {
 			courselist = coursesrv.getAllCourse();

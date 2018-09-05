@@ -24,6 +24,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import java.io.IOException;
+import java.net.Socket;
+
 import VC.client.bz.Impl.CourseSrvImpl;
 import VC.client.view.Library.borrowbook;
 import VC.client.view.Library.mainFrame;
@@ -39,10 +41,17 @@ public class giveupCourse extends JFrame implements ActionListener{
 	JFrame f = new JFrame();
 
 	List<String> courseName = new ArrayList<String>();
-	public CourseSrvImpl coursesrv = new CourseSrvImpl("mike");
-	//String[] courseName = { "History", "Science", "Policy" };
 
-	public giveupCourse() {
+	private String usrname;
+	private Socket socket;
+	public CourseSrvImpl coursesrv;
+
+	public giveupCourse(String pusrname, Socket psocket) {
+		
+		coursesrv = new CourseSrvImpl(pusrname, psocket);
+		this.setUsrname(pusrname);
+		this.setSocket(psocket);
+		
 		List<Course> mycourselist = new ArrayList<Course>();
 		try {
 			mycourselist = coursesrv.getallMyCourse();
@@ -55,16 +64,12 @@ public class giveupCourse extends JFrame implements ActionListener{
 			System.out.println("fail2");
 			e1.printStackTrace();
 		}
-		System.out.println("size of courseName" + mycourselist.size());
 		for (int i = 0; i < mycourselist.size(); i++) {
-			//System.out.println("zero the added is " + mycourselist.get(i).toString());
-			//System.out.println("first the added course name is "+ mycourselist.get(i).getCourseName());
 			courseName.add(mycourselist.get(i).getCourseName());
-			//System.out.println("second the added course name is "+ courseName.get(i));
 		}
 		
 		//JFrame f = new JFrame();
-		MyTable1 mt1 = new MyTable1();
+		MyTable1 mt1 = new MyTable1(coursesrv);
 		
 		final JTable table1 = new JTable(mt1);
 		JCheckBox jc1 = new JCheckBox();
@@ -75,11 +80,6 @@ public class giveupCourse extends JFrame implements ActionListener{
 		//defaultModel = new DefaultTableModel(p, n);
         JScrollPane s = new JScrollPane(table1);
         f.getContentPane().add(s, BorderLayout.CENTER);
-		// 锟斤拷锟斤拷一锟斤拷默锟较的憋拷锟侥ｏ拷锟�
-
-		//defaultModel = new DefaultTableModel(p, n);
-		//table = new JTable(defaultModel);
-		//table.setPreferredScrollableViewportSize(new Dimension(400, 80));
         
 		table1.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -140,8 +140,8 @@ public class giveupCourse extends JFrame implements ActionListener{
 				System.out.println(courseName.get(a));
 				try {
 					System.out.println("start step1");
-					coursesrv = new CourseSrvImpl("mike");
-					coursesrv.deleteCourse(courseName.get(a), "mike");
+					coursesrv = new CourseSrvImpl(getUsrname(), getSocket());
+					coursesrv.deleteCourse(courseName.get(a), getUsrname());
 				} catch (ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -154,31 +154,50 @@ public class giveupCourse extends JFrame implements ActionListener{
 
 		}
 		if (e.getActionCommand().equals("返回")) {
-			new courseFrame();
+			new courseFrame(getUsrname(), getSocket());
 			f.setVisible(false);
 			//setVisible(false);
 		}
 		if (e.getActionCommand().equals("我的课程")) {
-			new mycourse();
+			new mycourse(getUsrname(), getSocket());
 			f.setVisible(false);
 		}
 		//table.revalidate();
 	}
 
+	/*
 	public static void main(String[] args) {
-		new giveupCourse();
+		new giveupCourse(getUsrname(), getSocket());
+	}
+	*/
+
+	public Socket getSocket() {
+		return socket;
+	}
+
+	public void setSocket(Socket socket) {
+		this.socket = socket;
+	}
+
+	public String getUsrname() {
+		return usrname;
+	}
+
+	public void setUsrname(String usrname) {
+		this.usrname = usrname;
 	}
 
 }
 
 class MyTable1 extends AbstractTableModel {
-	public CourseSrvImpl coursesrv = new CourseSrvImpl("mike");
+	public CourseSrvImpl coursesrv;
 	public Object[][] p = null;
 
 	public String[] n = { "课程编号", "课程名字", "授课老师", "学分","是否选择" };
 
-	public MyTable1() {
+	public MyTable1(CourseSrvImpl coursesrv0) {
 		super();
+		coursesrv = coursesrv0;
 		List<Course> courselist = new ArrayList<Course>();
 		try {
 			courselist = coursesrv.getallMyCourse();

@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import java.io.IOException;
+import java.net.Socket;
+
 import VC.client.bz.Impl.CourseSrvImpl;
 import VC.common.Course;
 
@@ -26,9 +28,17 @@ public class mycourse extends JFrame implements ActionListener{
 	JPanel panel = new JPanel();
 	Vector v1 = new Vector();
 	JFrame f = new JFrame();
-	public CourseSrvImpl coursesrv = new CourseSrvImpl("mike");
 	
-	public mycourse() {
+	private String usrname;
+	private Socket socket;
+	public CourseSrvImpl coursesrv;
+	
+	public mycourse(String pusrname, Socket psocket) {
+		
+		this.setUsrname(pusrname);
+		this.setSocket(psocket);
+		coursesrv = new CourseSrvImpl(pusrname, psocket);
+		
 		Object[][] p = null;
 		List<Course> mycourselist = new ArrayList<Course>();
 		try {
@@ -87,13 +97,35 @@ public class mycourse extends JFrame implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("返回")) {
-			new courseFrame();
+			new courseFrame(getUsrname(), getSocket());
 			f.setVisible(false);
 
 		}
 	}
+	/*
 	public static void main(String[] args) {
 		new mycourse();
+	}
+	*/
+
+
+	public Socket getSocket() {
+		return socket;
+	}
+
+
+	public void setSocket(Socket socket) {
+		this.socket = socket;
+	}
+
+
+	public String getUsrname() {
+		return usrname;
+	}
+
+
+	public void setUsrname(String usrname) {
+		this.usrname = usrname;
 	}
 
 

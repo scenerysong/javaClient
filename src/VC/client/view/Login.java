@@ -25,6 +25,7 @@ import javafx.stage.WindowEvent;
  *
  */
 public class Login extends Application{
+	
 	private Label tip = new Label("欢迎使用虚拟校园1.0");
 	private TextField account = new TextField();
 	private PasswordField password = new PasswordField();
@@ -39,9 +40,11 @@ public class Login extends Application{
 	//用于登录的
 	public LoginSrvImpl loginsrv = new LoginSrvImpl();
 	
+	
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
+	
 	
 	
 	public void start(Stage login) {

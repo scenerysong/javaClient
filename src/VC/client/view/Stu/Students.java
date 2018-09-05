@@ -2,6 +2,7 @@ package VC.client.view.Stu;
 
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.net.Socket;
 
 import VC.client.bz.Impl.StuSrvImpl;
 import VC.common.User;
@@ -33,14 +34,26 @@ public class Students extends Application {
 	private TextField sex = new TextField("性别");
 	private TextField study = new TextField("学籍");
 	private TextField birthday = new TextField("生日");
-
 	private FlowPane pane = new FlowPane();
 
+	private String usrname;
+	private Socket socket;
+	
+	public StuSrvImpl stusrv;
+	public Students() {
+		super();
+	}
+	public Students(String pusrname, Socket psocket) {
+		super();
+		this.setUsrname(pusrname);
+		this.setSocket(psocket);
+	}
+	
 	public void start(Stage login) {
 
 		// TO DO:add the request to get the initial information
-		/*
-		StuSrvImpl stusrv = new StuSrvImpl("mike");
+		
+		stusrv = new StuSrvImpl(this.getUsrname(),this.getSocket());
 		User myinfo = new User();
 		try {
 			myinfo = stusrv.getMyInfo();
@@ -51,11 +64,12 @@ public class Students extends Application {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		System.out.println(myinfo.getPersonname());
 		name = new TextField(myinfo.getPersonname());
 		sex = new TextField(myinfo.getSex());
 		study = new TextField(myinfo.getRace());
 		birthday = new TextField(myinfo.getBirthday());
-		*/
+		
 		
 		pane.setPadding(new Insets(11,12,13,14)); pane.setHgap(30); pane.setVgap(10); 
 		pane.getChildren().add(new Label("名字")); pane.getChildren().addAll(name);
@@ -68,8 +82,8 @@ public class Students extends Application {
 				backAction();
 		});
 
-		back.setOnAction(e -> backAction());
-		pane.getChildren().addAll(back);// 点击返回
+		//back.setOnAction(e -> backAction());
+		//pane.getChildren().addAll(back);// 点击返回
 
 		rewrite.setOnAction(e -> rewriteAction());
 		pane.getChildren().addAll(rewrite);// 点击修改信息
@@ -195,14 +209,15 @@ public class Students extends Application {
 		*/
 		// add the server
 		User person = new User();
+		person.setUsername(this.usrname);
 		person.setPersonname((String) newaccount.getText());
 		person.setSex((String) cb1.getValue());
 		person.setRace((String) cb2.getValue());
 		String birth = (String)cb3.getValue() + "/" + (String)cb4.getValue() + "/" + (String)cb5.getValue();
 		System.out.print(birth);
 		person.setBirthday(birth);
-		/*
-		StuSrvImpl stusrv = new StuSrvImpl("mike");
+		
+		stusrv = new StuSrvImpl(this.getUsrname(),this.getSocket());
 		try {
 			stusrv.updateMyInfo(person);
 		} catch (ClassNotFoundException e) {
@@ -212,7 +227,7 @@ public class Students extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		
 		
 		tip.setText("修改成功!");
 		sexitAction();
@@ -301,9 +316,9 @@ public class Students extends Application {
 		TextField study = new TextField("学籍2");
 		TextField birthday = new TextField("生日2");// 查询反应在文本
 
-		/*
+		
 		// add the server
-		StuSrvImpl stusrv = new StuSrvImpl("mike");
+		stusrv = new StuSrvImpl(this.getUsrname(),this.getSocket());
 		User myinfo = new User();
 		try {
 			myinfo = stusrv.getPersonInfo(number.getText());
@@ -318,7 +333,7 @@ public class Students extends Application {
 		sex = new TextField(myinfo.getSex());
 		study = new TextField(myinfo.getRace());
 		birthday = new TextField(myinfo.getBirthday());
-		*/
+		
 		
 		FlowPane ss = new FlowPane();
 		ss.setPadding(new Insets(11, 12, 13, 14));
@@ -344,7 +359,7 @@ public class Students extends Application {
 		back.setOnAction(e -> backAction2());
 		ss.getChildren().addAll(back);// 点击返回
 
-		Scene ssscene = new Scene(ss, 300, 270);
+		Scene ssscene = new Scene(ss, 280, 270);
 		SSign.setTitle("虚拟校园系统1.0-学籍管理");
 		SSign.setScene(ssscene);
 		SSign.setResizable(false);
@@ -374,8 +389,23 @@ public class Students extends Application {
 
 	}
 
+	/*
 	public static void main(String[] args) {
 		launch(args);
+	}
+	*/
+	
+	public String getUsrname() {
+		return usrname;
+	}
+	public void setUsrname(String usrname) {
+		this.usrname = usrname;
+	}
+	public Socket getSocket() {
+		return socket;
+	}
+	public void setSocket(Socket socket) {
+		this.socket = socket;
 	}
 
 }

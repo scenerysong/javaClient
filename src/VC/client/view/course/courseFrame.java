@@ -2,6 +2,8 @@ package VC.client.view.course;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.Socket;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.*;
@@ -12,13 +14,13 @@ public class courseFrame extends JFrame{
 	JButton button3 = new JButton("我的课程");
 	
 	JFrame jf = new JFrame();
-	public courseFrame() {
+	public courseFrame(String pusrname, Socket psocket) {
 		
 		jf.setTitle("虚拟校园选课系统");
 		jf.setSize(new Dimension(500, 200));
 		jf.setLocation(200, 200);
 		jf.setVisible(true);
-		jf.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		jf.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		jf.setLayout(null);
 		
 		jf.getContentPane().add(button1, null);
@@ -31,28 +33,32 @@ public class courseFrame extends JFrame{
 		
 		button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	new chooseCourse();
-            	jf.setVisible(false);
+            	new chooseCourse(pusrname, psocket);
+            	jf.dispose();
+            	// jf.setVisible(false);
             }
          });
 		
 		button3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	new mycourse();
-            	jf.setVisible(false);
+            	new mycourse(pusrname, psocket);
+            	jf.dispose();
+            	// jf.setVisible(false);
             }
          });
 		
 		button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	new giveupCourse();
-            	jf.setVisible(false);
+            	new giveupCourse(pusrname, psocket);
+            	jf.dispose();
+            	// jf.setVisible(false);
             }
          });
 		
 	}
-	
+	/*
 	public static void main(String[] args) {
-		new courseFrame();
+		new courseFrame(pusrname, psocket);
 	}
+	*/
 }
