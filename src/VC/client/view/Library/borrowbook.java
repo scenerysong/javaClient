@@ -51,14 +51,13 @@ import VC.common.Book;
 
 public class borrowbook extends JFrame implements ActionListener {
 	
-	//DefaultTableModel defaultModel = null;
+
 	JTable table = null;
 	JPanel panel = new JPanel();
 	Vector v1 = new Vector();
 	JFrame f = new JFrame();
 	public LibrarySrvImpl booksrv;
 
-	//String[] bookName = { "History", "Science", "Future", "Policy", "Furture" };
 	Vector<String> bookName = new Vector<String>();
 	public borrowbook(String pusrname, Socket psocket) {
 	
@@ -143,9 +142,6 @@ public class borrowbook extends JFrame implements ActionListener {
 			}
 			for (int i = 0; i < v1.size(); i++) {
 				int a = (int) v1.get(i);
-				//System.out.println(courseName.get(a));
-				// to do: the add course part
-				// v1.size()
 				try {
 	
 					booksrv.addBook(bookName.get(a), booksrv.getUseraccount());
@@ -176,14 +172,7 @@ public class borrowbook extends JFrame implements ActionListener {
 class MyTable18 extends AbstractTableModel {
 	public LibrarySrvImpl booksrv;
 	public Object[][] p = null;
-	/*
-	Object[][] p = {
-            { "History", "987", "Mike",false },
-            { "Science", "124", "Dan", false }, 
-            {"Future","246","Peter",false},
-            {"Policy","768","Markus",false},
-            {"Furture","111","Song",false},};
-*/
+
 	public String[] n = { "涔﹀悕", "鍑虹増鍟� ","浣滆��", "鏄惁鍔犲叆" };
 
 	public MyTable18(LibrarySrvImpl booksrv0) {

@@ -186,7 +186,7 @@ public class returnbooks extends JFrame implements ActionListener {
 }
 
 class MyTable1 extends AbstractTableModel {
-	//public LibrarySrvImpl booksrv = new LibrarySrvImpl("mike");
+
 	public Object[][] p = null;
 	
 	public String[] n = { "书名", "出版商 ","作者", "是否还书" };
