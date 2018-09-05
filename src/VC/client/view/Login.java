@@ -111,13 +111,14 @@ public class Login extends Application{
 	
 	
 	private void logAction() {
-		String RightAccount = "seu";
-		String RightPassword = "dongdajiruan";
+		//String RightAccount = "seu";
+		//String RightPassword = "dongdajiruan";
 		// 就比如这个地方就要用sendmessage方法发送账户,并接受密码来比较
 		// 然后才有下面的这个操作
 		// 实现如下
 		try {
 			try {
+				// loginsrv = new LoginSrvImpl();
 				if(loginsrv.judgeLogin(account.getText(), password.getText())) {
 					Menu a = new Menu();
 					Stage menu = new Stage();
@@ -137,7 +138,7 @@ public class Login extends Application{
 			e.printStackTrace();
 		}
 		
-		
+		/*
 		// 完成实现
 		if(account.getText().equals(RightAccount) && password.getText().equals(RightPassword)) {
 			Menu a = new Menu();
@@ -149,6 +150,7 @@ public class Login extends Application{
 			password.setText("");
 			tip.setText("账户或密码输入错误，请重试");
 		}
+		*/
 	}
 	
 	private TextField newaccount = new TextField();
