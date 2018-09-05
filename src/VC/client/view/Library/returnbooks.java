@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.net.Socket;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
@@ -35,10 +36,12 @@ public class returnbooks extends JFrame implements ActionListener {
 	JPanel panel = new JPanel();
 	Vector v1 = new Vector();
 	JFrame f = new JFrame();
-	public LibrarySrvImpl booksrv = new LibrarySrvImpl("mike");
+	public LibrarySrvImpl booksrv;
 	List<String> bookName = new ArrayList<String>();
 
-	public returnbooks() {
+	public returnbooks(String pusrname, Socket psocket) {
+		
+		booksrv = new LibrarySrvImpl(pusrname, psocket);
 		List<Book> mybooklist = new ArrayList<Book>();
 		/*
 		try {
@@ -163,20 +166,22 @@ public class returnbooks extends JFrame implements ActionListener {
 
 		}
 		if (e.getActionCommand().equals("返回")) {
-			new mainFrame();
+			new mainFrame(booksrv.getUseraccount(),booksrv.getSocket());
 			f.setVisible(false);
 			//setVisible(false);
 		}
 		if (e.getActionCommand().equals("我的书单")) {
-			new mybook();
+			new mybook(booksrv.getUseraccount(),booksrv.getSocket());
 			f.setVisible(false);
 		}
 		//table.revalidate();
 	}
 
+	/*
 	public static void main(String[] args) {
 		new returnbooks();
 	}
+	*/
 
 }
 

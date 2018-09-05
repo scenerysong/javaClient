@@ -12,6 +12,7 @@ import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.net.Socket;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
@@ -55,12 +56,13 @@ public class borrowbook extends JFrame implements ActionListener {
 	JPanel panel = new JPanel();
 	Vector v1 = new Vector();
 	JFrame f = new JFrame();
-	public LibrarySrvImpl booksrv = new LibrarySrvImpl("mike");
+	public LibrarySrvImpl booksrv;
 
 	//String[] bookName = { "History", "Science", "Future", "Policy", "Furture" };
 	Vector<String> bookName = new Vector<String>();
-	public borrowbook() {
+	public borrowbook(String pusrname, Socket psocket) {
 	
+		booksrv = new LibrarySrvImpl(pusrname, psocket);
 		List<Book> booklist = new ArrayList<Book>();
 		try {
 			booklist = booksrv.getAllBook();
@@ -75,32 +77,16 @@ public class borrowbook extends JFrame implements ActionListener {
 		for (int i = 0; i < booklist.size(); i++) {
 			bookName.add(booklist.get(i).getBookName());
 		}
-		//JFrame f = new JFrame();
-		MyTable18 mt = new MyTable18();
+
+		MyTable18 mt = new MyTable18(booksrv);
 		final JTable table = new JTable(mt);
 		JCheckBox jc1 = new JCheckBox();
 		table.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(jc1));
 		table.setPreferredScrollableViewportSize(new Dimension(400, 150));
-		/*
-		Object[][] p = {
-                { "History", "987", "Mike",false },
-                { "Science", "124", "Dan", false }, 
-                {"Future","246","Peter",false},
-                {"Policy","768","Markus",false},
-                {"Furture","111","Song",false},};
-		
-		String[] n = { "娑旓箑鎮�", "閸戣櫣澧楅崯锟�, "娴ｆ粏锟�", "閺勵垰鎯侀崝鐘插弳娑旓箑宕�" };
-		*/
-
-		//defaultModel = new DefaultTableModel(p, n);
+	
         JScrollPane s = new JScrollPane(table);
         f.getContentPane().add(s, BorderLayout.CENTER);
-		// 閿熸枻鎷烽敓鏂ゆ嫹涓�閿熸枻鎷烽粯閿熻緝鐨勬唻鎷烽敓渚ワ綇鎷烽敓锟�
 
-		//defaultModel = new DefaultTableModel(p, n);
-		//table = new JTable(defaultModel);
-		//table.setPreferredScrollableViewportSize(new Dimension(400, 80));
-        
         table.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				int row = table.getSelectedRow();
@@ -111,14 +97,12 @@ public class borrowbook extends JFrame implements ActionListener {
 				if (table.isCellSelected(row, column)) {
 					System.out.println(obj);
 					if (obj.equals(obj1)) {
-						//System.out.println(row);
 						v1.add(row);
 					}
 				}
 			}
 		});
 
-		// JPanel panel = new JPanel();
 		JButton b = new JButton("鍔犲叆涔﹀崟");
 		panel.add(b);
 		b.addActionListener(this);
@@ -155,7 +139,6 @@ public class borrowbook extends JFrame implements ActionListener {
 			for (int i = 0; i < v1.size(); i++) {
 				int a = v1.indexOf(i);
 				System.out.println(bookName.get(a));
-				// 閿熺殕鐚存嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷疯彉閿燂拷
 			
 			}
 			for (int i = 0; i < v1.size(); i++) {
@@ -164,8 +147,8 @@ public class borrowbook extends JFrame implements ActionListener {
 				// to do: the add course part
 				// v1.size()
 				try {
-					booksrv = new LibrarySrvImpl("mike");
-					booksrv.addBook(bookName.get(a), "mike");
+	
+					booksrv.addBook(bookName.get(a), booksrv.getUseraccount());
 				} catch (ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -178,25 +161,20 @@ public class borrowbook extends JFrame implements ActionListener {
 
 		}
 		if (e.getActionCommand().equals("杩斿洖")) {
-			new mainFrame();
+			new mainFrame(booksrv.getUseraccount(),booksrv.getSocket());
 			f.setVisible(false);
 			//setVisible(false);
 		}
 		if (e.getActionCommand().equals("鎴戠殑涔﹀崟")) {
-			new mybook();
+			new mybook(booksrv.getUseraccount(),booksrv.getSocket());
 			f.setVisible(false);
 		}
 		//table.revalidate();
 	}
-
-	public static void main(String[] args) {
-		new borrowbook();
-	}
-
 }
 
 class MyTable18 extends AbstractTableModel {
-	public LibrarySrvImpl booksrv = new LibrarySrvImpl("mike");
+	public LibrarySrvImpl booksrv;
 	public Object[][] p = null;
 	/*
 	Object[][] p = {
@@ -208,8 +186,10 @@ class MyTable18 extends AbstractTableModel {
 */
 	public String[] n = { "涔﹀悕", "鍑虹増鍟� ","浣滆��", "鏄惁鍔犲叆" };
 
-	public MyTable18() {
+	public MyTable18(LibrarySrvImpl booksrv0) {
+		
 		super();
+		booksrv = booksrv0;
 		List<Book> booklist = new ArrayList<Book>();
 		try {
 			booklist = booksrv.getAllBook();

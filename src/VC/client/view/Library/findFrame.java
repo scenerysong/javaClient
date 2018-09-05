@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.Socket;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,7 +43,9 @@ public class findFrame extends JFrame {
 	JFrame jf = new JFrame();
 	public LibrarySrvImpl booksrv;
 	List<Book> booklist = new ArrayList<Book>();
-	public findFrame() {
+	public findFrame(String pusrname, Socket psocket) {
+		
+		booksrv = new LibrarySrvImpl(pusrname, psocket);
 		
 		jf.setTitle("虚拟校图书馆查询界面");
 		jf.setSize(new Dimension(700, 505));
@@ -80,7 +83,6 @@ public class findFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					booksrv = new LibrarySrvImpl();
 					booklist=booksrv.searchName(jt.getText());
 					for(int i=0;i<booklist.size();i++) {
 						String name =booklist.get(i).getBookName();
@@ -97,7 +99,7 @@ public class findFrame extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				new borrowbook();
+				new borrowbook(pusrname, psocket);
             	setVisible(false);
 			}
 		});
@@ -105,7 +107,7 @@ public class findFrame extends JFrame {
 		JButton bt2 = new JButton("返回");
 		bt2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new mainFrame();
+				new mainFrame(pusrname, psocket);
 				jf.setVisible(false);
 			}
 		});
@@ -117,8 +119,10 @@ public class findFrame extends JFrame {
 		jf.setVisible(true);
 	}
 
+	/*
 	public static void main(String[] args) {
 		new findFrame();
 	}
+	*/
 
 }

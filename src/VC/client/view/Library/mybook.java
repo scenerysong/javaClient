@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.net.Socket;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
@@ -58,11 +59,11 @@ public class mybook extends JFrame implements ActionListener{
 	public Object[][] p = null;
 	public String[] n = { "����", "������ ","����" };
 	
-	public mybook() {
+	public mybook(String pusrname, Socket psocket) {
 		
 		List<Book> booklist = new ArrayList<Book>();
 		try {
-			booksrv = new LibrarySrvImpl("mike");
+			booksrv = new LibrarySrvImpl(pusrname, psocket);
 			booklist = booksrv.getallMyBook();
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -113,14 +114,17 @@ public class mybook extends JFrame implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("����")) {
-			new mainFrame();
+			new mainFrame(booksrv.getUseraccount(), booksrv.getSocket());
 			f.setVisible(false);
 
 		}
 	}
+	
+	/*
 	public static void main(String[] args) {
 		new mybook();
 	}
+	*/
 
 
 }

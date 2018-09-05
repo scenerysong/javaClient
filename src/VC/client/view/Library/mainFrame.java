@@ -2,6 +2,8 @@ package VC.client.view.Library;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.Socket;
+
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -31,14 +33,21 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public class mainFrame extends JFrame{
-	JButton button1 = new JButton("²éÑ¯");
-	JButton button2 = new JButton("½èÊé");
-	JButton button3 = new JButton("»¹Êé");
-	JButton button4 = new JButton("ÎÒµÄÊéµ¥");
+	
+	private String usrname;
+	private Socket passocket;
+	
+	JButton button1 = new JButton("ï¿½ï¿½Ñ¯");
+	JButton button2 = new JButton("ï¿½ï¿½ï¿½ï¿½");
+	JButton button3 = new JButton("ï¿½ï¿½ï¿½ï¿½");
+	JButton button4 = new JButton("ï¿½Òµï¿½ï¿½éµ¥");
 	JFrame jf = new JFrame();
-	public mainFrame() {
+	public mainFrame(String pusrname, Socket psocket) {
 		
-		jf.setTitle("ÐéÄâÐ£Í¼Êé¹Ý");
+		// this.setUsrname(pusrname);
+		// this.setPassocket(psocket);
+		
+		jf.setTitle("ï¿½ï¿½ï¿½ï¿½Ð£Í¼ï¿½ï¿½ï¿½");
 		jf.setSize(new Dimension(550, 200));
 		jf.setLocation(200, 200);
 		jf.setVisible(true);
@@ -57,34 +66,52 @@ public class mainFrame extends JFrame{
 		
 		button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	new findFrame();
+            	new findFrame(pusrname, psocket);
             	jf.setVisible(false);
             }
          });
 		
 		button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	new borrowbook();
+            	new borrowbook(pusrname, psocket);
             	jf.setVisible(false);
             }
          });
 		
 		button3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	new returnbooks();
+            	new returnbooks(pusrname, psocket);
             	jf.setVisible(false);
             }
          });
 		button4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	new mybook();
+            	new mybook(pusrname, psocket);
             	jf.setVisible(false);
             }
          });
 		
 	}
 	
+	public String getUsrname() {
+		return usrname;
+	}
+
+	public void setUsrname(String usrname) {
+		this.usrname = usrname;
+	}
+
+	public Socket getPassocket() {
+		return passocket;
+	}
+
+	public void setPassocket(Socket passocket) {
+		this.passocket = passocket;
+	}
+	
+	/*
 	public static void main(String[] args) {
 		new mainFrame();
 	}
+	*/
 }

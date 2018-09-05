@@ -28,9 +28,9 @@ import VC.common.Goods;
 
 public class Store extends Application{
 	
-	public ShopSrvImpl shopsrv = new ShopSrvImpl();
-	private ArrayList<TextField> tfs = new ArrayList<TextField>();
-	private String[] NUM ;
+	public ShopSrvImpl shopsrv;
+	private ArrayList<TextField> tfs = new ArrayList();
+	
 	private Button beSure = new Button("加入购物车");
 	private Button buy =new Button("购买");
 	private Button shoppingcart = new Button("我的购物车");
@@ -85,6 +85,7 @@ public class Store extends Application{
 		List<String> goodsPrice = new ArrayList<String>();
 		List<String> goodsNum = new ArrayList<String>();
 		
+		shopsrv = new ShopSrvImpl("mike");
 		List<Goods> goodslist = shopsrv.getAllGoods();
 		
 		for(int i=0;i<goodslist.size();i++) {
@@ -120,20 +121,21 @@ public class Store extends Application{
 
 		gridPane.add(beSure, 4, a+1);
 	    
-		int b=tfs.size();
-		
-		for(int i=0;i<b;i++) {
-			NUM[i]=tfs.get(i).getText();
-		}
+		int b=tfs.size();	
 		
 		beSure.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
+				String[] NUM =new String[b];
+				for(int i=0;i<b;i++) {
+					NUM[i]=tfs.get(i).getText();
+				}
 				try {
             		for(int i=0;i<b;i++) {
             			if(Integer.valueOf(NUM[i])!=0) {
-            				shopsrv.addAllGoods(goodsName.get(i),NUM[i],"wls");
+            				shopsrv = new ShopSrvImpl("mike");
+            				shopsrv.addAllGoods(goodsName.get(i),NUM[i],"mike");
             			}
             			
             		}
@@ -163,6 +165,8 @@ public class Store extends Application{
 		List<String> GoodsID = new ArrayList<String>();
 		List<String> GoodsPrice = new ArrayList<String>();
 		List<String> NUM = new ArrayList<String>();
+		
+		shopsrv = new ShopSrvImpl("mike");
 		List<Goods> goodslist = shopsrv.getAllMyGoods();
 		for(int i=0;i<goodslist.size();i++) {
 			GoodsName.add(i, goodslist.get(i).getProductName());
@@ -179,7 +183,7 @@ public class Store extends Application{
 		gridPane.add(new Label("商品名称"),2, 0);
 		gridPane.add(new Label("商品价格"),4,0 );
 		gridPane.add(new Label("商品数目"),6, 0 );
-		gridPane.add(new Label("购买数量"),8, 0);
+
 		
 		int a=GoodsID.size();
 
@@ -199,6 +203,7 @@ public class Store extends Application{
 				// TODO Auto-generated method stub
 				try {
             		for(int i=0;i<goodslist.size();i++) {
+            			shopsrv = new ShopSrvImpl("mike");
             			shopsrv.buyAllGoods(GoodsName.get(i), "wls");
             		}
             		
@@ -222,8 +227,9 @@ public class Store extends Application{
 		
 	}
 	
+	
+	
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
-
 }

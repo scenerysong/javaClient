@@ -120,7 +120,7 @@ public class Login extends Application{
 			try {
 				// loginsrv = new LoginSrvImpl();
 				if(loginsrv.judgeLogin(account.getText(), password.getText())) {
-					Menu a = new Menu();
+					Menu a = new Menu(account.getText(), loginsrv.getSocket());
 					Stage menu = new Stage();
 					a.start(menu);
 					balance.set(1);

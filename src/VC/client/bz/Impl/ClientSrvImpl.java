@@ -17,6 +17,11 @@ public class ClientSrvImpl {
 	private Socket socket = null;
 	private String Useraccount = null;
 	
+	public ClientSrvImpl(String user, Socket sock) {
+		this.setSocket(sock);
+		this.setUseraccount(user);
+	}
+	
 	public ClientSrvImpl(String user) {
 		
 		this.setUseraccount(user);

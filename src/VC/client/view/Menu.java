@@ -1,5 +1,7 @@
 package VC.client.view;
 
+import java.net.Socket;
+
 import VC.client.view.Library.mainFrame;
 import javafx.application.Application;
 import javafx.beans.InvalidationListener;
@@ -19,6 +21,16 @@ import javafx.stage.Stage;
 
 public class Menu extends Application{
 	
+	private String usrname;
+	private Socket passocket;
+	public Menu() {
+		super();
+	}
+	public Menu(String a, Socket s) {
+		super();
+		this.setUsrname(a);
+		this.setPassocket(s);
+	}
 	
 	private Label Tip = new Label("欢迎使用虚拟校园1.0");
 	private Button logout = new Button("注销");
@@ -85,7 +97,7 @@ public class Menu extends Application{
 		Tip.setFont(Font.font("黑体",20));
 		hBox.getChildren().add(Tip);
 		hBox.getChildren().add(new Label("   "));
-		Label account = new Label("seu");
+		Label account = new Label(this.getUsrname());
 		account.setFont(Font.font("黑体",14));
 		hBox.getChildren().add(account);
 		hBox.getChildren().add(logout);
@@ -124,10 +136,26 @@ public class Menu extends Application{
 	
 	private void TushuguanAction() {
 		System.out.println("this is library part");
-		new mainFrame();
+		new mainFrame(this.getUsrname(),this.getPassocket());
 	}
 	
 	private void ShangdianAction() {
 		System.out.println("this is shop part");
+	}
+
+	public String getUsrname() {
+		return usrname;
+	}
+
+	public void setUsrname(String usrname) {
+		this.usrname = usrname;
+	}
+
+	public Socket getPassocket() {
+		return passocket;
+	}
+
+	public void setPassocket(Socket passocket) {
+		this.passocket = passocket;
 	}
 }

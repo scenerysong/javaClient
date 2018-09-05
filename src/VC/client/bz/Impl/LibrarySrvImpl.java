@@ -1,6 +1,7 @@
 package VC.client.bz.Impl;
 
 import java.io.IOException;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,9 @@ public class LibrarySrvImpl extends ClientSrvImpl {
 	}
 	public LibrarySrvImpl(String name) {
 		super(name);
+	}
+	public LibrarySrvImpl(String name, Socket sock) {
+		super(name,sock);
 	}
 
 	public List<Book> searchName(String bookname) throws IOException, ClassNotFoundException {
