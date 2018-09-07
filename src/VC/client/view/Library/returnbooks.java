@@ -101,11 +101,20 @@ public class returnbooks extends JFrame implements ActionListener {
 				int column = table1.getSelectedColumn();
 				Object obj = table1.getValueAt(row, column);
 				Object obj1 = true;
+				Object obj2 = false;
 				if (table1.isCellSelected(row, column)) {
 					System.out.println(obj);
 					if (obj.equals(obj1)) {
-						//System.out.println(row);
 						v1.add(row);
+					}
+					if(obj.equals(obj2)) {
+						Vector v = new Vector();
+						for(int i=0;i<v1.size();i++) {
+							if(v1.indexOf(i)!=row) {
+								v.add(v1.indexOf(i));
+							}
+						}
+						v1=v;
 					}
 				}
 			}

@@ -59,6 +59,7 @@ public class borrowbook extends JFrame implements ActionListener {
 	public LibrarySrvImpl booksrv;
 
 	Vector<String> bookName = new Vector<String>();
+	//booksrv = new LibrarySrvImpl(pusrname, psocket);
 	public borrowbook(String pusrname, Socket psocket) {
 	
 		booksrv = new LibrarySrvImpl(pusrname, psocket);
@@ -78,7 +79,8 @@ public class borrowbook extends JFrame implements ActionListener {
 		}
 
 		MyTable18 mt = new MyTable18(booksrv);
-		final JTable table = new JTable(mt);
+		//final JTable table = new JTable(mt);
+		table = new JTable(mt);
 		JCheckBox jc1 = new JCheckBox();
 		table.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(jc1));
 		table.setPreferredScrollableViewportSize(new Dimension(400, 150));
@@ -93,10 +95,20 @@ public class borrowbook extends JFrame implements ActionListener {
 				int column = table.getSelectedColumn();
 				Object obj = table.getValueAt(row, column);
 				Object obj1 = true;
+				Object obj2 = false;
 				if (table.isCellSelected(row, column)) {
 					System.out.println(obj);
 					if (obj.equals(obj1)) {
 						v1.add(row);
+					}
+					if(obj.equals(obj2)) {
+						Vector v = new Vector();
+						for(int i=0;i<v1.size();i++) {
+							if(v1.indexOf(i)!=row) {
+								v.add(v1.indexOf(i));
+							}
+						}
+						v1=v;
 					}
 				}
 			}
@@ -135,6 +147,7 @@ public class borrowbook extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("加入书单")) {
+			
 			for (int i = 0; i < v1.size(); i++) {
 				int a = v1.indexOf(i);
 			}

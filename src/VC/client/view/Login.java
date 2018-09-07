@@ -287,7 +287,17 @@ public class Login extends Application{
 				}
 				else {
 					if(z == 0) {
-						//授权码
+						//发送注册信息
+						try {
+							loginsrv.register(newaccount.getText(), newpassword.getText(), license.getText());
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
 						sexitAction();
 						signtip.setText("欢迎使用虚拟校园1.0");
 						tip.setText("注册成功！");
@@ -469,6 +479,16 @@ public class Login extends Application{
 				else {
 					if(z == 0) {
 						//授权码
+						try {
+							loginsrv.register(oldaccount.getText(), Newpassword.getText(), License.getText());
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
 						fexitAction();
 						forgettip.setText("欢迎使用虚拟校园1.0");
 						oldaccount.setText("");
