@@ -59,7 +59,6 @@ public class ShopSrvImpl extends ClientSrvImpl {
 		boolean res = false;
 		String type = MessageType.CMD_BUY_ALL_GOODS;
 		GoodsMessage sendmsg = new GoodsMessage();
-		sendmsg.setSender(username);
 		sendmsg.setType(type);
 		sendmsg.setProductName(goodsname);
 		sendmsg.setID(getUseraccount());
@@ -75,7 +74,6 @@ public class ShopSrvImpl extends ClientSrvImpl {
 		boolean res = false;
 		String type = MessageType.CMD_ADD_ALL_GOODS;
 		GoodsMessage sendmsg = new GoodsMessage();
-		sendmsg.setSender(username);
 		sendmsg.setType(type);
 		sendmsg.setProductName(mygoodsname);
 		sendmsg.setGoodsNum(num);
