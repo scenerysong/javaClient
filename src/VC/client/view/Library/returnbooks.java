@@ -135,7 +135,7 @@ public class returnbooks extends JFrame implements ActionListener {
 		contentPane.add(panel, BorderLayout.NORTH);
 		contentPane.add(s, BorderLayout.CENTER);
 		f.getContentPane().add(s, BorderLayout.CENTER);
-		f.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		f.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		f.setLocation(200, 200);
 		f.setResizable(false);
         f.setTitle("虚拟校园图书馆系统还书界面");
@@ -176,12 +176,14 @@ public class returnbooks extends JFrame implements ActionListener {
 		}
 		if (e.getActionCommand().equals("返回")) {
 			new mainFrame(booksrv.getUseraccount(),booksrv.getSocket());
-			f.setVisible(false);
+			//f.setVisible(false);
 			//setVisible(false);
+			f.dispose();
 		}
 		if (e.getActionCommand().equals("我的书单")) {
 			new mybook(booksrv.getUseraccount(),booksrv.getSocket());
-			f.setVisible(false);
+			f.dispose();
+			//f.setVisible(false);
 		}
 		//table.revalidate();
 	}

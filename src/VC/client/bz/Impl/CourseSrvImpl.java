@@ -38,13 +38,13 @@ public class CourseSrvImpl extends ClientSrvImpl{
 		return retCourselist;
 	}
 	
-	public boolean addCourse(String coursename, String username) throws ClassNotFoundException, IOException {
+	public boolean addCourse(String coursename) throws ClassNotFoundException, IOException {
 		
 		boolean res = false;
 		String type = MessageType.CMD_ADD_ALL_COURSE;
 		CourseMessage sendmsg = new CourseMessage();
 		sendmsg.setType(type);
-		sendmsg.setID(username);
+		sendmsg.setID(getUseraccount());
 		sendmsg.setCourseName(coursename);
 		
 		this.SendMessage(sendmsg);
@@ -55,12 +55,12 @@ public class CourseSrvImpl extends ClientSrvImpl{
 		return res;
 	}
 	
-	public boolean deleteCourse(String coursename, String username) throws ClassNotFoundException, IOException{
+	public boolean deleteCourse(String coursename) throws ClassNotFoundException, IOException{
 		boolean res = false;
 		String type = MessageType.CMD_DELETE_ALL_COURSE;
 		CourseMessage sendmsg = new CourseMessage();
 		sendmsg.setType(type);
-		sendmsg.setID(username);
+		sendmsg.setID(getUseraccount());
 		sendmsg.setCourseName(coursename);
 
 		//System.out.println("start send message");

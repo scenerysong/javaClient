@@ -51,7 +51,7 @@ public class findFrame extends JFrame {
 		jf.setSize(new Dimension(700, 505));
 		jf.setLocation(200, 200);
 		jf.setVisible(true);
-		jf.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		jf.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		jf.setLayout(null);
 		jf.setLayout(new GridLayout(4, 1));		
 
@@ -68,15 +68,15 @@ public class findFrame extends JFrame {
 		jf.add(jp3);
 
 		JTable tb = new JTable();
-		//tb.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);// 锟斤拷锟斤拷锟窖★拷锟侥Ｊ斤拷锟斤拷锟轿伙拷锟斤拷锟斤拷锟窖★拷瘛⒌锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷选锟斤拷锟斤拷锟斤拷选锟斤拷
+		//tb.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tb.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		tb.setRowHeight(30);
-		JTableHeader header = tb.getTableHeader(); // 锟斤拷取 JTable 锟斤拷头锟侥讹拷锟斤拷
+		JTableHeader header = tb.getTableHeader(); 
 		header.setFont(new Font("微软雅黑",  Font.PLAIN, 16));
-		header.setPreferredSize(new Dimension(header.getWidth(), 35)); // 锟斤拷锟矫达拷锟斤拷锟斤拷锟斤拷锟窖★拷锟叫 
+		header.setPreferredSize(new Dimension(header.getWidth(), 35)); 
 		scrollPane.setViewportView(tb);
 		model = (DefaultTableModel) tb.getModel();
-		model.setColumnIdentifiers(new Object[] {  "编号", "书名", "馆藏", "数量" });
+		model.setColumnIdentifiers(new Object[] {  "书名", "作者", "出版社" });
 
 		JButton bt = new JButton("查询");
 		bt.addActionListener(new ActionListener() {
@@ -86,10 +86,9 @@ public class findFrame extends JFrame {
 					booklist=booksrv.searchName(jt.getText());
 					for(int i=0;i<booklist.size();i++) {
 						String name =booklist.get(i).getBookName();
-						String id = booklist.get(i).getBookID();
 						String publisher = booklist.get(i).getBookPublisher();
-						String num = booklist.get(i).getBookNum();
-						model.addRow(new Object[] { id, name, publisher, num });
+						String author = booklist.get(i).getBookAuthor();
+						model.addRow(new Object[] { name, author, publisher });
 						tb.setModel(model);
 					}
 				} catch (ClassNotFoundException e1) {
@@ -99,7 +98,7 @@ public class findFrame extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				new borrowbook(pusrname, psocket);
+				//new borrowbook(pusrname, psocket);
             	setVisible(false);
 			}
 		});
@@ -108,7 +107,7 @@ public class findFrame extends JFrame {
 		bt2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new mainFrame(pusrname, psocket);
-				jf.setVisible(false);
+				jf.dispose();
 			}
 		});
 		

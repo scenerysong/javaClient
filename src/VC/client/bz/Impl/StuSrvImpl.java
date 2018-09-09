@@ -45,6 +45,8 @@ public class StuSrvImpl extends ClientSrvImpl{
 		UserMessage sendmsg = new UserMessage();
 		sendmsg.setType(type);
 		sendmsg.setUser(usr);
+		sendmsg.setID(getUseraccount());
+		sendmsg.setUsername(getUseraccount());
 		
 		this.SendMessage(sendmsg);
 		

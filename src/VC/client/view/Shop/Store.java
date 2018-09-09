@@ -14,11 +14,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.*;
-import javafx.scene.input.*;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -30,7 +27,7 @@ import VC.common.Goods;
 public class Store extends Application{
 	
 	public ShopSrvImpl shopsrv;
-	private ArrayList<TextField> tfs = new ArrayList();
+	private ArrayList<TextField> tfs = new ArrayList<TextField>();
 	
 	private Button beSure = new Button("加入购物车");
 	private Button buy =new Button("购买");
@@ -77,7 +74,13 @@ public class Store extends Application{
 			}
 		});
 		pane.getChildren().addAll(shoppingcart);
-
+		
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent event) {
+            	primaryStage1.close();
+            }
+        });
+		
 		balance.addListener(new InvalidationListener() {
 			public void invalidated(Observable ov) {
 				Store.close();
@@ -109,7 +112,7 @@ public class Store extends Application{
 			goodsNum.add(i,goodslist.get(i).getGoodsNum());
 		}
 
-		Pane pane = new Pane();
+		//Pane pane = new Pane();
 		GridPane gridPane = new GridPane();
 		gridPane.setHgap(20);
 		gridPane.setVgap(20);
@@ -135,45 +138,25 @@ public class Store extends Application{
 
 		gridPane.add(beSure, 4, a+1);
 	    
-		int b=tfs.size();	
+		int b=tfs.size();
 		
-		beSure.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				String[] NUM =new String[b];
-				for(int i=0;i<b;i++) {
-					NUM[i]=tfs.get(i).getText();
-				}
-				try {
-            		for(int i=0;i<b;i++) {
-            			if(Integer.parseInt(NUM[i])!=0) {
-            				shopsrv = new ShopSrvImpl(getUsrname(), getSocket());
-            				shopsrv.addAllGoods(goodsName.get(i),NUM[i],"mike");
-            			}
-            			
-            		}
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				
-				}
+		beSure.setOnAction(e->{
+			try {
+				join();
+			} catch (ClassNotFoundException | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-        });
-	
+		});
+
 		GridPane.setHalignment(beSure, HPos.RIGHT);
-		
 		
 		Scene scene = new Scene(gridPane,600,650);
 		primaryStage.setTitle("Store");
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
 	}
-	
+	private Stage primaryStage1 = new Stage();
 	private void storepageAction() throws ClassNotFoundException, IOException {
 		List<String> GoodsName = new ArrayList<String>();
 		List<String> GoodsID = new ArrayList<String>();
@@ -207,10 +190,9 @@ public class Store extends Application{
 			gridPane.add(new Label(GoodsPrice.get(i-1)),4, i);
 			gridPane.add(new Label(NUM.get(i-1)),6, i);
 		}
-
+		Label money = new Label("余额");
+        gridPane.add(money,4,a+1 );
 		gridPane.add(buy, 2, a+1);
-	
-	    
 		buy.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -218,9 +200,8 @@ public class Store extends Application{
 				try {
             		for(int i=0;i<goodslist.size();i++) {
             			shopsrv = new ShopSrvImpl(getUsrname(), getSocket());
-            			shopsrv.buyAllGoods(GoodsName.get(i), "wls");
+            			shopsrv.buyAllGoods(GoodsName.get(i));
             		}
-            		
 				} catch (ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -235,12 +216,47 @@ public class Store extends Application{
 		
 		
 		Scene scene = new Scene(gridPane,600,650);
-		primaryStage.setTitle("Store");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		primaryStage1.setTitle("Store");
+		primaryStage1.setScene(scene);
+		primaryStage1.show();
 		
 	}
 	
+	private void join() throws ClassNotFoundException, IOException {
+		List<String> goodsName = new ArrayList<String>();
+		
+		shopsrv = new ShopSrvImpl(this.getUsrname(),this.getSocket());
+		List<Goods> goodslist = shopsrv.getAllGoods();
+		
+		for(int i=0;i<goodslist.size();i++) {
+			goodsName.add(i, goodslist.get(i).getProductName());
+		}
+		int b=tfs.size();
+		List<String> NUM = new ArrayList<String>();
+		List<String> NUM1 = new ArrayList<String>();
+		List<String> Goodsname = new ArrayList<String>();
+		//String[] NUM =new String[b];
+		for(int i=0;i<b;i++) {
+			NUM.add(tfs.get(i).getText());
+		}
+		try {
+				for(int i=0;i<NUM.size();i++) {
+					if(!NUM.get(i).equals("")) {
+						Goodsname.add(goodsName.get(i));
+						NUM1.add(NUM.get(i));
+					}
+				}
+    			shopsrv.addAllGoods(Goodsname,NUM1);
+    		
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		
+		}
+	}
 	
 	
 	public static void main(String[] args) {

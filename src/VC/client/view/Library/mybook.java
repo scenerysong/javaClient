@@ -95,7 +95,7 @@ public class mybook extends JFrame implements ActionListener{
 		contentPane.add(panel, BorderLayout.NORTH);
 		contentPane.add(s, BorderLayout.CENTER);
 		f.getContentPane().add(s, BorderLayout.CENTER);
-		f.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		f.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		f.setLocation(200, 200);
 		f.setResizable(false);
         f.setTitle("虚拟图书馆");
@@ -115,8 +115,8 @@ public class mybook extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("返回")) {
 			new mainFrame(booksrv.getUseraccount(), booksrv.getSocket());
-			f.setVisible(false);
-
+			//f.setVisible(false);
+			f.dispose();
 		}
 	}
 	

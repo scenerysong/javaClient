@@ -58,11 +58,12 @@ public class borrowbook extends JFrame implements ActionListener {
 	JFrame f = new JFrame();
 	public LibrarySrvImpl booksrv;
 
-	Vector<String> bookName = new Vector<String>();
-	//booksrv = new LibrarySrvImpl(pusrname, psocket);
+	List<String> bookName = new ArrayList<String>();
+
 	public borrowbook(String pusrname, Socket psocket) {
 	
 		booksrv = new LibrarySrvImpl(pusrname, psocket);
+		
 		List<Book> booklist = new ArrayList<Book>();
 		try {
 			booklist = booksrv.getAllBook();
@@ -128,7 +129,7 @@ public class borrowbook extends JFrame implements ActionListener {
 		contentPane.add(panel, BorderLayout.NORTH);
 		contentPane.add(s, BorderLayout.CENTER);
 		f.getContentPane().add(s, BorderLayout.CENTER);
-		f.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		f.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		f.setLocation(200, 200);
 		f.setResizable(false);
         f.setTitle("虚拟图书馆");
@@ -169,12 +170,13 @@ public class borrowbook extends JFrame implements ActionListener {
 		}
 		if (e.getActionCommand().equals("返回")) {
 			new mainFrame(booksrv.getUseraccount(),booksrv.getSocket());
-			f.setVisible(false);
+			f.dispose();
+			//f.setVisible(false);
 			//setVisible(false);
 		}
 		if (e.getActionCommand().equals("我的书单")) {
 			new mybook(booksrv.getUseraccount(),booksrv.getSocket());
-			f.setVisible(false);
+			f.dispose();
 		}
 		//table.revalidate();
 	}

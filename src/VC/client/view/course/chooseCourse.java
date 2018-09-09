@@ -21,9 +21,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 import VC.client.bz.Impl.CourseSrvImpl;
-import VC.client.view.Library.borrowbook;
 import VC.client.view.Library.mainFrame;
-import VC.client.view.Library.mybook;
 import VC.common.Course;
 
 import java.util.ArrayList;
@@ -46,23 +44,22 @@ import javax.swing.WindowConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
+
+
 public class chooseCourse extends JFrame implements ActionListener {
 	JTable table = null;
 	JPanel panel = new JPanel();
 	Vector v1 = new Vector();
 	JFrame f = new JFrame();
+	public CourseSrvImpl coursesrv;
 
 	List<String> courseName = new ArrayList<String>();
-	// String[] courseName = { "History", "Science", "Policy" };
-
-	public CourseSrvImpl coursesrv;
 
 	public chooseCourse(String pusrname, Socket psocket) {
 
 		coursesrv = new CourseSrvImpl(pusrname, psocket);
 		
-		String[] n = { "课程编号", "课程名字", "授课老师", "学分", "是否选择" };
-
 		List<Course> courselist = new ArrayList<Course>();
 		try {
 			courselist = coursesrv.getAllCourse();
@@ -76,14 +73,13 @@ public class chooseCourse extends JFrame implements ActionListener {
 		
 		for (int i = 0; i < courselist.size(); i++) {
 			courseName.add(courselist.get(i).getCourseName());
-			System.out.println(courseName.get(i));
 		}
 
 		MyTable18 mt = new MyTable18(coursesrv);
-		final JTable table = new JTable(mt);
+		table = new JTable(mt);
 		JCheckBox jc1 = new JCheckBox();
-		table.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(jc1));
-		table.setPreferredScrollableViewportSize(new Dimension(400, 150));
+		table.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(jc1));
+		table.setPreferredScrollableViewportSize(new Dimension(600, 350));
 		JScrollPane s = new JScrollPane(table);
 		f.getContentPane().add(s, BorderLayout.CENTER);
 
@@ -94,15 +90,25 @@ public class chooseCourse extends JFrame implements ActionListener {
 				int column = table.getSelectedColumn();
 				Object obj = table.getValueAt(row, column);
 				Object obj1 = true;
+				Object obj2 = false;
 				if (table.isCellSelected(row, column)) {
+					System.out.println(obj);
 					if (obj.equals(obj1)) {
 						v1.add(row);
+					}
+					if(obj.equals(obj2)) {
+						Vector v = new Vector();
+						for(int i=0;i<v1.size();i++) {
+							if(v1.indexOf(i)!=row) {
+								v.add(v1.indexOf(i));
+							}
+						}
+						v1=v;
 					}
 				}
 			}
 		});
 
-		// JPanel panel = new JPanel();
 		JButton b = new JButton("加入课程");
 		panel.add(b);
 		b.addActionListener(this);
@@ -117,7 +123,7 @@ public class chooseCourse extends JFrame implements ActionListener {
 		contentPane.add(panel, BorderLayout.NORTH);
 		contentPane.add(s, BorderLayout.CENTER);
 		f.getContentPane().add(s, BorderLayout.CENTER);
-		f.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		f.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		f.setLocation(200, 200);
 		f.setResizable(false);
 		f.setTitle("虚拟校园图书馆借书界面");
@@ -138,11 +144,8 @@ public class chooseCourse extends JFrame implements ActionListener {
 		if (e.getActionCommand().equals("加入课程")) {
 			for (int i = 0; i < v1.size(); i++) {
 				int a = (int) v1.get(i);
-				System.out.println(a);
 				try {
-					coursesrv = new CourseSrvImpl("mike");
-					System.out.println(courseName.get(a));
-					coursesrv.addCourse(courseName.get(a), "mike");
+					coursesrv.addCourse(courseName.get(a));
 				} catch (ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -156,25 +159,20 @@ public class chooseCourse extends JFrame implements ActionListener {
 		}
 		if (e.getActionCommand().equals("返回")) {
 			new courseFrame(coursesrv.getUseraccount(), coursesrv.getSocket());
-			f.setVisible(false);
+			//f.setVisible(false);
 			// setVisible(false);
+			f.dispose();
 		}
 		if (e.getActionCommand().equals("我的课程")) {
 			new mycourse(coursesrv.getUseraccount(),coursesrv.getSocket());
-			f.setVisible(false);
+			//f.setVisible(false);
+			f.dispose();
 		}
 	}
-
-	/*
-	public static void main(String[] args) {
-		new chooseCourse();
-	}
-	*/
 
 }
 
 class MyTable18 extends AbstractTableModel {
-
 	public CourseSrvImpl coursesrv;
 	public Object[][] p = null;
 
@@ -199,7 +197,7 @@ class MyTable18 extends AbstractTableModel {
 			p[i][0] = courselist.get(i).getCourseID();
 			p[i][1] = courselist.get(i).getCourseName();
 			p[i][2] = courselist.get(i).getCourseTeacher();
-			p[i][3] = courselist.get(i).getCourseNum();
+			p[i][3] = courselist.get(i).getCredit();
 			p[i][4] = false;
 		}
 	}
@@ -225,10 +223,10 @@ class MyTable18 extends AbstractTableModel {
 	}
 
 	@Override
+	
 	public Class<?> getColumnClass(int columnIndex) {
-		return getValueAt(0, columnIndex).getClass();
+		return getValueAt(0, columnIndex) == null ? null : getValueAt(0, columnIndex).getClass();
 	}
-
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		return true;

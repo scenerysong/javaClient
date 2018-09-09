@@ -81,12 +81,14 @@ public class Login extends Application{
 		});
 		pane.getChildren().addAll(sign);
 		
+		/*
 		forget.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
 				forgetAction();
 			}
 		});
 		pane.getChildren().addAll(forget);
+		*/
 		
 		tip.setMinWidth(200);
 		tip.setAlignment(Pos.CENTER);

@@ -35,7 +35,6 @@ import VC.common.Course;
 public class giveupCourse extends JFrame implements ActionListener{
 	
 	DefaultTableModel defaultModel = null;
-	
 	JPanel panel = new JPanel();
 	Vector v1 = new Vector();
 	JFrame f = new JFrame();
@@ -57,11 +56,9 @@ public class giveupCourse extends JFrame implements ActionListener{
 			mycourselist = coursesrv.getallMyCourse();
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
-			System.out.println("fail1");
 			e1.printStackTrace();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			System.out.println("fail2");
 			e1.printStackTrace();
 		}
 		for (int i = 0; i < mycourselist.size(); i++) {
@@ -113,7 +110,7 @@ public class giveupCourse extends JFrame implements ActionListener{
 		contentPane.add(panel, BorderLayout.NORTH);
 		contentPane.add(s, BorderLayout.CENTER);
 		f.getContentPane().add(s, BorderLayout.CENTER);
-		f.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		f.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		f.setLocation(200, 200);
 		f.setResizable(false);
         f.setTitle("虚拟校园选课界面退课");
@@ -141,7 +138,7 @@ public class giveupCourse extends JFrame implements ActionListener{
 				try {
 					System.out.println("start step1");
 					coursesrv = new CourseSrvImpl(getUsrname(), getSocket());
-					coursesrv.deleteCourse(courseName.get(a), getUsrname());
+					coursesrv.deleteCourse(courseName.get(a));
 				} catch (ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -155,12 +152,14 @@ public class giveupCourse extends JFrame implements ActionListener{
 		}
 		if (e.getActionCommand().equals("返回")) {
 			new courseFrame(getUsrname(), getSocket());
-			f.setVisible(false);
+			//f.setVisible(false);
 			//setVisible(false);
+			f.dispose();
 		}
 		if (e.getActionCommand().equals("我的课程")) {
 			new mycourse(getUsrname(), getSocket());
-			f.setVisible(false);
+			//f.setVisible(false);
+			f.dispose();
 		}
 		//table.revalidate();
 	}
@@ -214,7 +213,7 @@ class MyTable1 extends AbstractTableModel {
 			p[i][0] = courselist.get(i).getCourseID();
 			p[i][1] = courselist.get(i).getCourseName();
 			p[i][2] = courselist.get(i).getCourseTeacher();
-			p[i][3] = courselist.get(i).getCourseNum();
+			p[i][3] = courselist.get(i).getCredit();
 			p[i][4] = false;
 		}
 	}
@@ -241,7 +240,7 @@ class MyTable1 extends AbstractTableModel {
 
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
-		return getValueAt(0, columnIndex).getClass();
+		return getValueAt(0, columnIndex) == null ? null : getValueAt(0, columnIndex).getClass();
 	}
 
 	@Override

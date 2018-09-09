@@ -37,11 +37,11 @@ public class mycourse extends JFrame implements ActionListener{
 		
 		this.setUsrname(pusrname);
 		this.setSocket(psocket);
-		coursesrv = new CourseSrvImpl(pusrname, psocket);
 		
 		Object[][] p = null;
 		List<Course> mycourselist = new ArrayList<Course>();
 		try {
+			coursesrv = new CourseSrvImpl(pusrname, psocket);
 			mycourselist = coursesrv.getallMyCourse();
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -51,16 +51,16 @@ public class mycourse extends JFrame implements ActionListener{
 			e1.printStackTrace();
 		}
 		p = new Object[mycourselist.size()][5];
-		
+
 		for (int i = 0; i < mycourselist.size(); i++) {
-			p[i][0] = mycourselist.get(i).getCourseID();
-			p[i][1] = mycourselist.get(i).getCourseName();
-			p[i][2] = mycourselist.get(i).getCourseTeacher();
-			p[i][3] = mycourselist.get(i).getCourseNum();
+			p[i][0] = new String(mycourselist.get(i).getCourseID());
+			p[i][1] = new String(mycourselist.get(i).getCourseName());
+			p[i][2] = new String(mycourselist.get(i).getCourseTeacher());
+			p[i][3] = new String(mycourselist.get(i).getCredit());
 		}
 		
 		
-		String[] n = { "课程编号", "课程名字", "授课老师", "学分","是否选择" };
+		String[] n = { "课程编号", "课程名字", "授课老师", "学分" };
 		
 		defaultModel = new DefaultTableModel(p, n);
 		JTable table = new JTable(defaultModel);
@@ -78,7 +78,7 @@ public class mycourse extends JFrame implements ActionListener{
 		contentPane.add(panel, BorderLayout.NORTH);
 		contentPane.add(s, BorderLayout.CENTER);
 		f.getContentPane().add(s, BorderLayout.CENTER);
-		f.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		f.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		f.setLocation(200, 200);
 		f.setResizable(false);
         f.setTitle("虚拟校园选课界面我的课程");
@@ -98,7 +98,8 @@ public class mycourse extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("返回")) {
 			new courseFrame(getUsrname(), getSocket());
-			f.setVisible(false);
+			//f.setVisible(false);
+			f.dispose();
 
 		}
 	}

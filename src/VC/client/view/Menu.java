@@ -144,22 +144,18 @@ public class Menu extends Application{
 	}
 	
 	private void XuejiAction() {
-		System.out.println("this is xue ji part");
 		new Students(this.getUsrname(), this.getPassocket()).start(new Stage());
 	}
 	
 	private void XuankeAction() {
-		System.out.println("this is xuan ke part");
 		new courseFrame(this.getUsrname(),this.getPassocket());
 	}
 	
 	private void TushuguanAction() {
-		System.out.println("this is library part");
 		new mainFrame(this.getUsrname(),this.getPassocket());
 	}
 	
 	private void ShangdianAction() {
-		System.out.println("this is shop part");
 		new Store(this.getUsrname(), this.getPassocket()).start(new Stage());
 	}
 

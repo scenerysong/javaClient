@@ -27,6 +27,7 @@ public class Course implements java.io.Serializable{
 		this.setCourseRoom(course.getCourseRoom());
 		this.setCourseNum(course.getCourseNum());
 		this.setCourseTeacher(course.getCourseTeacher());
+		this.setCredit(course.getCredit());
 	}
 	
 	public String getCourseName() {

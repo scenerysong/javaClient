@@ -35,7 +35,8 @@ public class Students extends Application {
 	private TextField study = new TextField("学籍");
 	private TextField birthday = new TextField("生日");
 	private FlowPane pane = new FlowPane();
-
+	private Button b1 = new Button("确		认");
+	private Button b2 = new Button("取		消");
 	private String usrname;
 	private Socket socket;
 	
@@ -168,12 +169,10 @@ public class Students extends Application {
 
 		s.add(cb5, 1, 5);
 
-		Button b1 = new Button("确		认");
+		
 
 		b1.setOnAction(e -> SignAction());
 		s.add(b1, 1, 6);
-
-		Button b2 = new Button("取		消");
 		b2.setOnAction(e -> sexitAction());
 		s.add(b2, 1, 7);
 
@@ -300,7 +299,7 @@ public class Students extends Application {
 		});
 
 		Scene sscene = new Scene(f, 300, 230);
-		Forget.setTitle("虚拟校园系统1.0-忘记密码");
+		Forget.setTitle("虚拟校园系统1.0-查询学籍");
 		Forget.setScene(sscene);
 		Forget.setResizable(false);
 		Forget.setAlwaysOnTop(true);
@@ -311,6 +310,10 @@ public class Students extends Application {
 
 	public void SearchAction() {
 
+		b1.setOnAction(null);
+		b2.setOnAction(null);
+		number.setEditable(false);
+		
 		TextField name = new TextField("名字2");
 		TextField sex = new TextField("性别2");
 		TextField study = new TextField("学籍2");
@@ -369,6 +372,11 @@ public class Students extends Application {
 	}
 
 	private void backAction2() {
+		
+		b1.setOnAction(e->SearchAction());
+		b2.setOnAction(e->fexitAction());
+		number.setEditable(true);
+		
 		SSign.close();
 		searchtip.setText("欢迎使用虚拟校园1.0");
 	}

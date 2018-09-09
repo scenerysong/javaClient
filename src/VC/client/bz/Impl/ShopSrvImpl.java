@@ -55,7 +55,7 @@ public class ShopSrvImpl extends ClientSrvImpl {
 		return myGoodslist;
 	}
 	
-	public boolean buyAllGoods(String goodsname,String username)throws ClassNotFoundException, IOException{
+	public boolean buyAllGoods(String goodsname)throws ClassNotFoundException, IOException{
 		boolean res = false;
 		String type = MessageType.CMD_BUY_ALL_GOODS;
 		GoodsMessage sendmsg = new GoodsMessage();
@@ -70,13 +70,13 @@ public class ShopSrvImpl extends ClientSrvImpl {
 		res = rcvmsg.isRes();
 		return res;
 	}
-	public boolean addAllGoods(String mygoodsname,String num,String username)throws ClassNotFoundException, IOException{
+	public boolean addAllGoods(List<String> goodsName,List<String> Num)throws ClassNotFoundException, IOException{
 		boolean res = false;
 		String type = MessageType.CMD_ADD_ALL_GOODS;
 		GoodsMessage sendmsg = new GoodsMessage();
 		sendmsg.setType(type);
-		sendmsg.setProductName(mygoodsname);
-		sendmsg.setGoodsNum(num);
+		sendmsg.setGoodsName(goodsName);
+		sendmsg.setNum(Num);
 		sendmsg.setID(getUseraccount());
 		
 		this.SendMessage(sendmsg);
