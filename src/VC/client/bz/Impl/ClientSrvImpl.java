@@ -6,10 +6,11 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import VC.client.vo.ClientSrv;
 import VC.common.Message;
 import VC.common.SocketConstant;
 
-public class ClientSrvImpl {
+public class ClientSrvImpl implements ClientSrv {
 	
 	private static final String SERVER_ADDRESS = SocketConstant.SERVER_ADDRESS;
 	private static final int SERVER_PORT = SocketConstant.SERVER_PORT;
@@ -49,6 +50,10 @@ public class ClientSrvImpl {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.client.bz.Impl.ClientSrv#SendMessage(VC.common.Message)
+	 */
+	@Override
 	public void SendMessage(Message sendmsg) throws IOException {
 		
 		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
@@ -56,6 +61,10 @@ public class ClientSrvImpl {
 		oos.flush();
 	}
 	
+	/* (non-Javadoc)
+	 * @see VC.client.bz.Impl.ClientSrv#ReceiveMessage()
+	 */
+	@Override
 	public Message ReceiveMessage() throws IOException, ClassNotFoundException {
 		
 		Message rcvmsg = new Message();
@@ -65,19 +74,35 @@ public class ClientSrvImpl {
 		return rcvmsg;
 	}
 	
+	/* (non-Javadoc)
+	 * @see VC.client.bz.Impl.ClientSrv#getSocket()
+	 */
+	@Override
 	public Socket getSocket() {
 		return socket;
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.client.bz.Impl.ClientSrv#setSocket(java.net.Socket)
+	 */
+	@Override
 	public void setSocket(Socket socket) {
 		this.socket = socket;
 	}
 
 
+	/* (non-Javadoc)
+	 * @see VC.client.bz.Impl.ClientSrv#getUseraccount()
+	 */
+	@Override
 	public String getUseraccount() {
 		return Useraccount;
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.client.bz.Impl.ClientSrv#setUseraccount(java.lang.String)
+	 */
+	@Override
 	public void setUseraccount(String useraccount) {
 		Useraccount = useraccount;
 	}

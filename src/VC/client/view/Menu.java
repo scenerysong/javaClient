@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 import VC.client.view.Stu.Students;
 import VC.client.view.course.courseFrame;
+import VC.client.vo.MenuSrv;
 import VC.client.bz.Impl.MenuSrvImpl;
 import VC.client.view.Library.mainFrame;
 import VC.client.view.Shop.Store;
@@ -45,7 +46,7 @@ public class Menu extends Application{
 	private Button shangdian = new Button("商店系统");
 	private BorderPane pane = new BorderPane();	
 	private DoubleProperty balance = new SimpleDoubleProperty();
-	public MenuSrvImpl menusrv;
+	public MenuSrv menusrv;
 
 	public static void main(String[] args) {
 		Application.launch(args);

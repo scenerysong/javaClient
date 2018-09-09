@@ -32,6 +32,7 @@ import VC.client.bz.Impl.LibrarySrvImpl;
 import VC.client.view.Library.borrowbook;
 import VC.client.view.Library.mainFrame;
 import VC.client.view.Library.mybook;
+import VC.client.vo.LibrarySrv;
 import VC.common.Book;
 public class findFrame extends JFrame {
 	public static DefaultTableModel model = new DefaultTableModel();
@@ -41,7 +42,7 @@ public class findFrame extends JFrame {
 	JPanel jp2 = new JPanel();
 	JPanel jp3 = new JPanel();
 	JFrame jf = new JFrame();
-	public LibrarySrvImpl booksrv;
+	public LibrarySrv booksrv;
 	List<Book> booklist = new ArrayList<Book>();
 	public findFrame(String pusrname, Socket psocket) {
 		

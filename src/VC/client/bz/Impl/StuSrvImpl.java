@@ -5,11 +5,12 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import VC.client.vo.StuSrv;
 import VC.common.MessageType;
 import VC.common.User;
 import VC.common.UserMessage;
 
-public class StuSrvImpl extends ClientSrvImpl{
+public class StuSrvImpl extends ClientSrvImpl implements StuSrv{
 
 	public StuSrvImpl() {
 		super();
@@ -21,6 +22,10 @@ public class StuSrvImpl extends ClientSrvImpl{
 		super(username, socket);
 	}
 	
+	/* (non-Javadoc)
+	 * @see VC.client.bz.Impl.StuSrv#getMyInfo()
+	 */
+	@Override
 	public User getMyInfo() throws IOException, ClassNotFoundException {
 		
 		User myUser = new User();
@@ -39,6 +44,10 @@ public class StuSrvImpl extends ClientSrvImpl{
 		return myUser;
 	}
 	
+	/* (non-Javadoc)
+	 * @see VC.client.bz.Impl.StuSrv#updateMyInfo(VC.common.User)
+	 */
+	@Override
 	public boolean updateMyInfo(User usr) throws IOException, ClassNotFoundException {
 		
 		String type = MessageType.CMD_UPDATE_MY_USER;
@@ -58,6 +67,10 @@ public class StuSrvImpl extends ClientSrvImpl{
 		return res;
 	}
 	
+/* (non-Javadoc)
+ * @see VC.client.bz.Impl.StuSrv#getPersonInfo(java.lang.String)
+ */
+@Override
 public User getPersonInfo(String usr) throws IOException, ClassNotFoundException {
 		
 		User myUser = new User();

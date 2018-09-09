@@ -46,6 +46,7 @@ import VC.client.bz.Impl.LibrarySrvImpl;
 import VC.client.view.Library.borrowbook;
 import VC.client.view.Library.mainFrame;
 import VC.client.view.Library.mybook;
+import VC.client.vo.LibrarySrv;
 import VC.common.Book;
 
 
@@ -183,12 +184,12 @@ public class borrowbook extends JFrame implements ActionListener {
 }
 
 class MyTable18 extends AbstractTableModel {
-	public LibrarySrvImpl booksrv;
+	public LibrarySrv booksrv;
 	public Object[][] p = null;
 
 	public String[] n = { "书名", "出版商","作者", "是否加入书单" };
 
-	public MyTable18(LibrarySrvImpl booksrv0) {
+	public MyTable18(LibrarySrv booksrv0) {
 		
 		super();
 		booksrv = booksrv0;

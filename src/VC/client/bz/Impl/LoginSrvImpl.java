@@ -2,15 +2,20 @@ package VC.client.bz.Impl;
 
 import java.io.IOException;
 
+import VC.client.vo.LoginSrv;
 import VC.common.LoginMessage;
 import VC.common.MessageType;
 
-public class LoginSrvImpl extends ClientSrvImpl {
+public class LoginSrvImpl extends ClientSrvImpl implements LoginSrv {
 
 	public LoginSrvImpl() {
 		super();
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.client.bz.Impl.LoginSrv#judgeLogin(java.lang.String, java.lang.String)
+	 */
+	@Override
 	public boolean judgeLogin(String name, String passwd) throws IOException, ClassNotFoundException {
 
 		boolean ans = false;
@@ -29,6 +34,10 @@ public class LoginSrvImpl extends ClientSrvImpl {
 		return ans;
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.client.bz.Impl.LoginSrv#register(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
 	public void register(String name, String passwd, String admincode) throws IOException, ClassNotFoundException {
 
 		LoginMessage sendmsg = new LoginMessage();

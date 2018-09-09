@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import VC.client.bz.Impl.StuSrvImpl;
+import VC.client.vo.StuSrv;
 import VC.common.User;
 import javafx.application.Application;
 import javafx.application.*;
@@ -40,7 +41,7 @@ public class Students extends Application {
 	private String usrname;
 	private Socket socket;
 	
-	public StuSrvImpl stusrv;
+	public StuSrv stusrv;
 	public Students() {
 		super();
 	}

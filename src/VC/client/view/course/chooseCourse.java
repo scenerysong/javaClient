@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 
 import VC.client.bz.Impl.CourseSrvImpl;
 import VC.client.view.Library.mainFrame;
+import VC.client.vo.CourseSrv;
 import VC.common.Course;
 
 import java.util.ArrayList;
@@ -173,12 +174,12 @@ public class chooseCourse extends JFrame implements ActionListener {
 }
 
 class MyTable18 extends AbstractTableModel {
-	public CourseSrvImpl coursesrv;
+	public CourseSrv coursesrv;
 	public Object[][] p = null;
 
 	public String[] n = { "课程编号", "课程名字", "授课老师", "学分", "是否选择" };
 
-	public MyTable18(CourseSrvImpl coursesrv0) {
+	public MyTable18(CourseSrv coursesrv0) {
 		super();
 		coursesrv = coursesrv0;
 		List<Course> courselist = new ArrayList<Course>();

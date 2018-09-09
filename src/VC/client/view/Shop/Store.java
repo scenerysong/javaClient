@@ -19,14 +19,14 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 import VC.client.bz.Impl.ShopSrvImpl;
+import VC.client.vo.ShopSrv;
 import VC.common.Goods;
 
 
 public class Store extends Application{
 	
-	public ShopSrvImpl shopsrv;
+	public ShopSrv shopsrv;
 	private ArrayList<TextField> tfs = new ArrayList<TextField>();
 	
 	private Button beSure = new Button("加入购物车");

@@ -25,6 +25,7 @@ import java.awt.event.MouseEvent;
 import VC.client.view.Library.mainFrame;
 import VC.client.bz.Impl.LibrarySrvImpl;
 import VC.client.view.Library.mybook;
+import VC.client.vo.LibrarySrv;
 import VC.common.Book;
 import java.util.List;
 import java.util.ArrayList;
@@ -202,7 +203,7 @@ class MyTable1 extends AbstractTableModel {
 	
 	public String[] n = { "书名", "出版商 ","作者", "是否还书" };
 	
-	public MyTable1(LibrarySrvImpl booksrv) {
+	public MyTable1(LibrarySrv booksrv) {
 		super();
 		List<Book> booklist = new ArrayList<Book>();
 		try {

@@ -5,11 +5,12 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import VC.client.vo.ShopSrv;
 import VC.common.Goods;
 import VC.common.GoodsMessage;
 import VC.common.MessageType;
 
-public class ShopSrvImpl extends ClientSrvImpl {
+public class ShopSrvImpl extends ClientSrvImpl implements ShopSrv {
 
 	public ShopSrvImpl() {
 		super();
@@ -21,6 +22,10 @@ public class ShopSrvImpl extends ClientSrvImpl {
 		super(username, socket);
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.client.bz.Impl.ShopSrv#getAllGoods()
+	 */
+	@Override
 	public List<Goods> getAllGoods() throws ClassNotFoundException, IOException {
 
 		List<Goods> retGoodslist = new ArrayList<Goods>();
@@ -38,6 +43,10 @@ public class ShopSrvImpl extends ClientSrvImpl {
 		return retGoodslist;
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.client.bz.Impl.ShopSrv#getAllMyGoods()
+	 */
+	@Override
 	public List<Goods> getAllMyGoods() throws ClassNotFoundException, IOException {
 
 		List<Goods> myGoodslist = new ArrayList<Goods>();
@@ -55,6 +64,10 @@ public class ShopSrvImpl extends ClientSrvImpl {
 		return myGoodslist;
 	}
 	
+	/* (non-Javadoc)
+	 * @see VC.client.bz.Impl.ShopSrv#buyAllGoods(java.lang.String)
+	 */
+	@Override
 	public boolean buyAllGoods(String goodsname)throws ClassNotFoundException, IOException{
 		boolean res = false;
 		String type = MessageType.CMD_BUY_ALL_GOODS;
@@ -70,6 +83,10 @@ public class ShopSrvImpl extends ClientSrvImpl {
 		res = rcvmsg.isRes();
 		return res;
 	}
+	/* (non-Javadoc)
+	 * @see VC.client.bz.Impl.ShopSrv#addAllGoods(java.util.List, java.util.List)
+	 */
+	@Override
 	public boolean addAllGoods(List<String> goodsName,List<String> Num)throws ClassNotFoundException, IOException{
 		boolean res = false;
 		String type = MessageType.CMD_ADD_ALL_GOODS;

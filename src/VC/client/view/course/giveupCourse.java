@@ -30,6 +30,7 @@ import VC.client.bz.Impl.CourseSrvImpl;
 import VC.client.view.Library.borrowbook;
 import VC.client.view.Library.mainFrame;
 import VC.client.view.Library.mybook;
+import VC.client.vo.CourseSrv;
 import VC.common.Course;
 
 public class giveupCourse extends JFrame implements ActionListener{
@@ -43,7 +44,7 @@ public class giveupCourse extends JFrame implements ActionListener{
 
 	private String usrname;
 	private Socket socket;
-	public CourseSrvImpl coursesrv;
+	public CourseSrv coursesrv;
 
 	public giveupCourse(String pusrname, Socket psocket) {
 		
@@ -189,12 +190,12 @@ public class giveupCourse extends JFrame implements ActionListener{
 }
 
 class MyTable1 extends AbstractTableModel {
-	public CourseSrvImpl coursesrv;
+	public CourseSrv coursesrv;
 	public Object[][] p = null;
 
 	public String[] n = { "课程编号", "课程名字", "授课老师", "学分","是否选择" };
 
-	public MyTable1(CourseSrvImpl coursesrv0) {
+	public MyTable1(CourseSrv coursesrv0) {
 		super();
 		coursesrv = coursesrv0;
 		List<Course> courselist = new ArrayList<Course>();

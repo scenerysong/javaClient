@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import VC.client.bz.Impl.CourseSrvImpl;
+import VC.client.vo.CourseSrv;
 import VC.common.Course;
 
 public class mycourse extends JFrame implements ActionListener{
@@ -31,7 +32,7 @@ public class mycourse extends JFrame implements ActionListener{
 	
 	private String usrname;
 	private Socket socket;
-	public CourseSrvImpl coursesrv;
+	public CourseSrv coursesrv;
 	
 	public mycourse(String pusrname, Socket psocket) {
 		
