@@ -191,7 +191,7 @@ public class Store extends Application{
 		 */
 		gridPane.add(new Label("商品编号"),0, 0);
 		gridPane.add(new Label("商品名称"),2, 0);
-		gridPane.add(new Label("商品价格"),4,0 );
+		gridPane.add(new Label("商品价格"),4, 0 );
 		gridPane.add(new Label("商品数目"),6, 0 );
 		int a=GoodsID.size();
 		for(int i=1;i<a+1;i++) {
@@ -202,6 +202,8 @@ public class Store extends Application{
 		}
 		Label money = new Label("余额");
         gridPane.add(money,4,a+1 );
+        String balance = shopsrv.getMyBalance();
+        gridPane.add(new Label(balance),6,a+1);
 		gridPane.add(buy, 2, a+1);
 		/*
 		 * 设置按钮“购买”所触发的事件

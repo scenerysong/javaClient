@@ -47,4 +47,11 @@ public interface ShopSrv {
 	 */
 	boolean addAllGoods(List<String> goodsName, List<String> Num) throws ClassNotFoundException, IOException;
 
+	/**
+	 * 得到用户余额信息
+	 * @return 用户余额
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+	String getMyBalance() throws IOException, ClassNotFoundException;
 }

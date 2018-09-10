@@ -43,6 +43,21 @@ public class ShopSrvImpl extends ClientSrvImpl implements ShopSrv {
 		return retGoodslist;
 	}
 
+	public String getMyBalance() throws IOException, ClassNotFoundException {
+		String balance;
+		String type = MessageType.CMD_GET_BALANCE;
+		GoodsMessage sendmsg = new GoodsMessage();
+		sendmsg.setType(type);
+		sendmsg.setID(getUseraccount());
+		
+		this.SendMessage(sendmsg);
+
+		GoodsMessage rcvmsg = new GoodsMessage();
+		rcvmsg = (GoodsMessage) this.ReceiveMessage();
+		balance = rcvmsg.getBalance();
+
+		return balance;
+	}
 	/* (non-Javadoc)
 	 * @see VC.client.bz.Impl.ShopSrv#getAllMyGoods()
 	 */
