@@ -5,22 +5,22 @@ import java.net.Socket;
 import VC.common.Message;
 
 /**
- *  °üº¬»ù±¾µÄSocketĞÅÏ¢,µ±Ç°ÓÃ»§ĞÅÏ¢ÒÔ¼°·¢ËÍºÍ½ÓÊÜÏûÏ¢µÄ·½·¨ <br>
- *  ÓÃÓÚ¸÷¸öÄ£¿é¹¦ÄÜÊµÏÖÊ±¼Ì³ĞÊ¹ÓÃ <br>
+ *  åŒ…å«åŸºæœ¬çš„Socketä¿¡æ¯,å½“å‰ç”¨æˆ·ä¿¡æ¯ä»¥åŠå‘é€å’Œæ¥å—æ¶ˆæ¯çš„æ–¹æ³• <br>
+ *  ç”¨äºå„ä¸ªæ¨¡å—åŠŸèƒ½å®ç°æ—¶ç»§æ‰¿ä½¿ç”¨ <br>
  * @author song
  *
  */
 public interface ClientSrv {
 
 	/**
-	 * ·¢ËÍÏûÏ¢µÄ·½·¨,Òª·¢ËÍµÄÏûÏ¢ÖÁÉÙÒª¼Ì³ĞMessageÀà
+	 * å‘é€æ¶ˆæ¯çš„æ–¹æ³•,è¦å‘é€çš„æ¶ˆæ¯è‡³å°‘è¦ç»§æ‰¿Messageç±»
 	 * @param sendmsg true
 	 */
 	void SendMessage(Message sendmsg) throws IOException;
 
 	/**
-	 * ½ÓÊÜÏûÏ¢µÄ·½·¨,½ÓÊÜµÄĞÅÏ¢ÎªMessageÀà <br>
-	 * ÓÉ´úÂë±àĞ´ÕßÄ¬ÈÏ½âÎöÎªÏàÓ¦µÄĞÅÏ¢ <br>
+	 * æ¥å—æ¶ˆæ¯çš„æ–¹æ³•,æ¥å—çš„ä¿¡æ¯ä¸ºMessageç±» <br>
+	 * ç”±ä»£ç ç¼–å†™è€…é»˜è®¤è§£æä¸ºç›¸åº”çš„ä¿¡æ¯ <br>
 	 */
 	Message ReceiveMessage() throws IOException, ClassNotFoundException;
 

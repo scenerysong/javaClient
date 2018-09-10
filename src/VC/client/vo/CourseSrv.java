@@ -6,14 +6,14 @@ import java.util.List;
 import VC.common.Course;
 
 /**
- * Ñ¡¿ÎÄ£¿é¹¦ÄÜÊµÏÖ,¼Ì³ĞClientSrv·½·¨
+ * é€‰è¯¾æ¨¡å—åŠŸèƒ½å®ç°,ç»§æ‰¿ClientSrvæ–¹æ³•
  * @author Song
  *
  */
 public interface CourseSrv {
 
 	/**
-	 * ·µ»ØËùÓĞ¿Î³ÌĞÅÏ¢,½âÎö·µ»ØÖµµÃµ½ÏàÓ¦¿Î³Ì
+	 * è¿”å›æ‰€æœ‰è¯¾ç¨‹ä¿¡æ¯,è§£æè¿”å›å€¼å¾—åˆ°ç›¸åº”è¯¾ç¨‹
 	 * @return List<Course>
 	 * @throws IOException
 	 * @throws ClassNotFoundException
@@ -21,25 +21,25 @@ public interface CourseSrv {
 	List<Course> getAllCourse() throws IOException, ClassNotFoundException;
 
 	/**
-	 * °´ÕÕ¿Î³ÌÃû³ÆÑ¡¿Î,ÓÃ»§Îªµ±Ç°ÓÃ»§,Ä¬ÈÏÃ»ÓĞÖØÃû¿Î³Ì
+	 * æŒ‰ç…§è¯¾ç¨‹åç§°é€‰è¯¾,ç”¨æˆ·ä¸ºå½“å‰ç”¨æˆ·,é»˜è®¤æ²¡æœ‰é‡åè¯¾ç¨‹
 	 * @param coursename
-	 * @return ÊÇ·ñ³É¹¦Ñ¡¿Î
+	 * @return æ˜¯å¦æˆåŠŸé€‰è¯¾
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
 	boolean addCourse(String coursename) throws ClassNotFoundException, IOException;
 
 	/**
-	 * °´ÕÕ¿Î³ÌÃû³ÆÍË¿Î,ÓÃ»§Îªµ±Ç°ÓÃ»§
+	 * æŒ‰ç…§è¯¾ç¨‹åç§°é€€è¯¾,ç”¨æˆ·ä¸ºå½“å‰ç”¨æˆ·
 	 * @param coursename
-	 * @return ÊÇ·ñ³É¹¦ÍË¿Î
+	 * @return æ˜¯å¦æˆåŠŸé€€è¯¾
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
 	boolean deleteCourse(String coursename) throws ClassNotFoundException, IOException;
 
 	/**
-	 * ·µ»Øµ±Ç°ÓÃ»§ËùÓĞÒÑ¾­Ñ¡µÄ¿Î³Ì,½âÎö·µ»ØÖµµÄµ½¿Î³Ì
+	 * è¿”å›å½“å‰ç”¨æˆ·æ‰€æœ‰å·²ç»é€‰çš„è¯¾ç¨‹,è§£æè¿”å›å€¼çš„åˆ°è¯¾ç¨‹
 	 * @return List<Course>
 	 * @throws IOException
 	 * @throws ClassNotFoundException

@@ -103,4 +103,5 @@ public class ShopSrvImpl extends ClientSrvImpl implements ShopSrv {
 		res = rcvmsg.isRes();
 		return res;
 	}
+	
 }
