@@ -89,7 +89,7 @@ public class Store extends Application{
 		 * 设置商店界面的相关属性
 		 */
 		Scene scene = new Scene(pane,230,140);
-		Store.setTitle("虚拟校园商店");
+		Store.setTitle("商店");
 		Store.setScene(scene);
 		Store.setResizable(false);
 		Store.show();	
