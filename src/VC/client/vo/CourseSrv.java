@@ -14,7 +14,7 @@ public interface CourseSrv {
 
 	/**
 	 * 返回所有课程信息,解析返回值得到相应课程
-	 * @return List<Course>
+	 * @return List
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
@@ -40,7 +40,7 @@ public interface CourseSrv {
 
 	/**
 	 * 返回当前用户所有已经选的课程,解析返回值的到课程
-	 * @return List<Course>
+	 * @return List
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */

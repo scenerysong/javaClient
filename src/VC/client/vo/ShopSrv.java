@@ -14,7 +14,7 @@ public interface ShopSrv {
 
 	/**
 	 * 得到所有商品,使用父类内置用户名
-	 * @return List<Goods>
+	 * @return List
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
@@ -22,7 +22,7 @@ public interface ShopSrv {
 
 	/**
 	 * 得到用户购物车所有商品,使用父类内置用户名
-	 * @return List<Goods>
+	 * @return List
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */

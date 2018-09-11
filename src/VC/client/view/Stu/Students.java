@@ -141,7 +141,7 @@ public class Students extends Application {
 		password.setEditable(false);
 		account.setText(null);
 		password.setText(null);
-		tip.setText("111欢迎使用虚拟校园1.0");
+		tip.setText("欢迎使用虚拟校园1.0");
 		back.setOnAction(null);
 		rewrite.setOnAction(null);
 		search.setOnAction(null);
@@ -271,7 +271,7 @@ public class Students extends Application {
 		f.setHgap(15);
 		f.setVgap(10);
 
-		f.add(new Label("输入学号"), 0, 0);
+		f.add(new Label("输入用户名"), 0, 0);
 
 		f.add(number, 1, 0);
 
@@ -315,10 +315,10 @@ public class Students extends Application {
 		b2.setOnAction(null);
 		number.setEditable(false);
 		
-		TextField name = new TextField("名字2");
-		TextField sex = new TextField("性别2");
-		TextField study = new TextField("学籍2");
-		TextField birthday = new TextField("生日2");// 查询反应在文本
+		TextField name = new TextField("名字");
+		TextField sex = new TextField("性别");
+		TextField study = new TextField("学籍");
+		TextField birthday = new TextField("生日");// 查询反应在文本
 
 		
 		// add the server

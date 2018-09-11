@@ -245,6 +245,7 @@ public class Store extends Application{
 		List<Goods> goodslist = shopsrv.getAllGoods();
 		for(int i=0;i<goodslist.size();i++) {
 			goodsName.add(i, goodslist.get(i).getProductName());
+			System.out.println(goodslist.get(i).getProductName());
 		}
 		int b=tfs.size();
 		List<String> NUM = new ArrayList<String>();
@@ -252,6 +253,7 @@ public class Store extends Application{
 		List<String> Goodsname = new ArrayList<String>();
 		for(int i=0;i<b;i++) {
 			NUM.add(tfs.get(i).getText());
+			System.out.println(tfs.get(i).getText());
 		}
 		try {
 				for(int i=0;i<NUM.size();i++) {

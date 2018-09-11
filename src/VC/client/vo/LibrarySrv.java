@@ -51,7 +51,7 @@ public interface LibrarySrv {
 
 	/**
 	 * 得到我借的所有书
-	 * @return List<Book>
+	 * @return List
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
