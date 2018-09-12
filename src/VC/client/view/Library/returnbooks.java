@@ -140,9 +140,10 @@ public class returnbooks extends JFrame implements ActionListener {
 		if (e.getActionCommand().equals("还书")) {
 			for (int i = 0; i < v1.size(); i++) {
 				int a = (int) v1.get(i);
+				System.out.println("this is returnbook part" + bookName.get(a));
 				try {
 					System.out.println("this is step returnbook");
-					booksrv.returnBook(bookName.get(a), "mike");
+					booksrv.returnBook(bookName.get(a));
 				} catch (ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

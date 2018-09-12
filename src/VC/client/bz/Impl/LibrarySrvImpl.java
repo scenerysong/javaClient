@@ -67,7 +67,7 @@ public class LibrarySrvImpl extends ClientSrvImpl implements LibrarySrv {
 	 * @see VC.client.bz.Impl.LibrarySrv#addBook(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public boolean addBook(String bookname, String username) throws ClassNotFoundException, IOException {
+	public boolean addBook(String bookname) throws ClassNotFoundException, IOException {
 
 		boolean res = false;
 		String type = MessageType.CMD_ADD_ALL_BOOK;
@@ -88,7 +88,7 @@ public class LibrarySrvImpl extends ClientSrvImpl implements LibrarySrv {
 	 * @see VC.client.bz.Impl.LibrarySrv#returnBook(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public boolean returnBook(String bookname, String username) throws ClassNotFoundException, IOException {
+	public boolean returnBook(String bookname) throws ClassNotFoundException, IOException {
 		boolean res = false;
 		String type = MessageType.CMD_DELETE_ALL_BOOK;
 		BookMessage sendmsg = new BookMessage();

@@ -37,7 +37,7 @@ public interface LibrarySrv {
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
-	boolean addBook(String bookname, String username) throws ClassNotFoundException, IOException;
+	boolean addBook(String bookname) throws ClassNotFoundException, IOException;
 
 	/**
 	 * 按书名和用户名还书
@@ -47,7 +47,7 @@ public interface LibrarySrv {
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
-	boolean returnBook(String bookname, String username) throws ClassNotFoundException, IOException;
+	boolean returnBook(String bookname) throws ClassNotFoundException, IOException;
 
 	/**
 	 * 得到我借的所有书
