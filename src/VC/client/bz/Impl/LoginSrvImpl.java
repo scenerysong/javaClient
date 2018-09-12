@@ -2,8 +2,6 @@ package VC.client.bz.Impl;
 
 import java.io.IOException;
 
-import org.jasypt.util.text.BasicTextEncryptor;
-
 import VC.client.vo.LoginSrv;
 import VC.common.LoginMessage;
 import VC.common.MessageType;
@@ -25,8 +23,7 @@ public class LoginSrvImpl extends ClientSrvImpl implements LoginSrv {
 		String type = MessageType.CMD_JUDGE_LOGIN;
 		sendmsg.setID(name);
 		sendmsg.setType(type);
-		BasicTextEncryptor encryptorText = new BasicTextEncryptor();
-		sendmsg.setPasswd(encryptorText.decrypt(passwd));
+		sendmsg.setPasswd(passwd);
 
 		this.SendMessage(sendmsg);
 
@@ -47,9 +44,8 @@ public class LoginSrvImpl extends ClientSrvImpl implements LoginSrv {
 		String type = MessageType.CMD_REGIS_LOGIN;
 		sendmsg.setID(name);
 		sendmsg.setType(type);
-		BasicTextEncryptor encryptorText = new BasicTextEncryptor();
-		sendmsg.setPasswd(encryptorText.decrypt(passwd));
-		sendmsg.setAdmincode(encryptorText.decrypt(admincode));
+		sendmsg.setPasswd(passwd);
+		sendmsg.setAdmincode(admincode);
 
 		this.SendMessage(sendmsg);
 
