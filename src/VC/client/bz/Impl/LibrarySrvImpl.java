@@ -73,7 +73,7 @@ public class LibrarySrvImpl extends ClientSrvImpl implements LibrarySrv {
 		String type = MessageType.CMD_ADD_ALL_BOOK;
 		BookMessage sendmsg = new BookMessage();
 		sendmsg.setType(type);
-		sendmsg.setID(username);
+		sendmsg.setID(this.getUseraccount());
 		sendmsg.setBookname(bookname);
 
 		this.SendMessage(sendmsg);
@@ -93,7 +93,7 @@ public class LibrarySrvImpl extends ClientSrvImpl implements LibrarySrv {
 		String type = MessageType.CMD_DELETE_ALL_BOOK;
 		BookMessage sendmsg = new BookMessage();
 		sendmsg.setType(type);
-		sendmsg.setID(username);
+		sendmsg.setID(this.getUseraccount());
 		sendmsg.setBookname(bookname);
 
 		this.SendMessage(sendmsg);
