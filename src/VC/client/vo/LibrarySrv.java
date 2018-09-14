@@ -32,7 +32,6 @@ public interface LibrarySrv {
 	/**
 	 * 按书名和用户名借书
 	 * @param bookname
-	 * @param username
 	 * @return 是否借书成功
 	 * @throws ClassNotFoundException
 	 * @throws IOException
@@ -42,7 +41,6 @@ public interface LibrarySrv {
 	/**
 	 * 按书名和用户名还书
 	 * @param bookname
-	 * @param username
 	 * @return 是否还书成功
 	 * @throws ClassNotFoundException
 	 * @throws IOException
